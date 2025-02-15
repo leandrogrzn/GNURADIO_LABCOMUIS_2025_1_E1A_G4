@@ -14,8 +14,9 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import QObject, pyqtSlot
 from gnuradio import analog
 from gnuradio import blocks
-from gnuradio import gr
+from gnuradio import channels
 from gnuradio.filter import firdes
+from gnuradio import gr
 from gnuradio.fft import window
 import sys
 import signal
@@ -65,13 +66,37 @@ class Practica_1_A(gr.top_block, Qt.QWidget):
         self.waveform = waveform = 102
         self.samp_rate = samp_rate = 32000
         self.offset = offset = 0
+        self.noise = noise = 0
         self.frequency = frequency = 1e3
+        self.f_offset = f_offset = 0
         self.amplitude = amplitude = 1
 
         ##################################################
         # Blocks
         ##################################################
 
+        self.tab_source = Qt.QTabWidget()
+        self.tab_source_widget_0 = Qt.QWidget()
+        self.tab_source_layout_0 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.tab_source_widget_0)
+        self.tab_source_grid_layout_0 = Qt.QGridLayout()
+        self.tab_source_layout_0.addLayout(self.tab_source_grid_layout_0)
+        self.tab_source.addTab(self.tab_source_widget_0, 'Source Controls')
+        self.top_grid_layout.addWidget(self.tab_source, 0, 0, 3, 2)
+        for r in range(0, 3):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 2):
+            self.top_grid_layout.setColumnStretch(c, 1)
+        self.tab_channel = Qt.QTabWidget()
+        self.tab_channel_widget_0 = Qt.QWidget()
+        self.tab_channel_layout_0 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.tab_channel_widget_0)
+        self.tab_channel_grid_layout_0 = Qt.QGridLayout()
+        self.tab_channel_layout_0.addLayout(self.tab_channel_grid_layout_0)
+        self.tab_channel.addTab(self.tab_channel_widget_0, 'Channel Controls')
+        self.top_grid_layout.addWidget(self.tab_channel, 0, 2, 3, 1)
+        for r in range(0, 3):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(2, 3):
+            self.top_grid_layout.setColumnStretch(c, 1)
         # Create the options list
         self._waveform_options = [100, 101, 102, 103, 104, 105]
         # Create the labels list
@@ -90,13 +115,39 @@ class Practica_1_A(gr.top_block, Qt.QWidget):
         self.top_layout.addWidget(self._waveform_tool_bar)
         self._offset_range = qtgui.Range(-5, 5, 100e-3, 0, 200)
         self._offset_win = qtgui.RangeWidget(self._offset_range, self.set_offset, "Offset", "counter_slider", float, QtCore.Qt.Horizontal)
-        self.top_layout.addWidget(self._offset_win)
+        self.tab_source_grid_layout_0.addWidget(self._offset_win, 1, 1, 1, 1)
+        for r in range(1, 2):
+            self.tab_source_grid_layout_0.setRowStretch(r, 1)
+        for c in range(1, 2):
+            self.tab_source_grid_layout_0.setColumnStretch(c, 1)
+        self._noise_range = qtgui.Range(0, 5, 0.01, 0, 200)
+        self._noise_win = qtgui.RangeWidget(self._noise_range, self.set_noise, "Noise Voltage", "counter_slider", float, QtCore.Qt.Horizontal)
+        self.tab_channel_grid_layout_0.addWidget(self._noise_win, 1, 0, 1, 1)
+        for r in range(1, 2):
+            self.tab_channel_grid_layout_0.setRowStretch(r, 1)
+        for c in range(0, 1):
+            self.tab_channel_grid_layout_0.setColumnStretch(c, 1)
         self._frequency_range = qtgui.Range(0, 1e4, 100, 1e3, 200)
         self._frequency_win = qtgui.RangeWidget(self._frequency_range, self.set_frequency, "Frequency in Hz", "counter_slider", float, QtCore.Qt.Horizontal)
-        self.top_layout.addWidget(self._frequency_win)
+        self.tab_source_grid_layout_0.addWidget(self._frequency_win, 2, 0, 1, 1)
+        for r in range(2, 3):
+            self.tab_source_grid_layout_0.setRowStretch(r, 1)
+        for c in range(0, 1):
+            self.tab_source_grid_layout_0.setColumnStretch(c, 1)
+        self._f_offset_range = qtgui.Range(0, 1e3, 0.1, 0, 200)
+        self._f_offset_win = qtgui.RangeWidget(self._f_offset_range, self.set_f_offset, "Frequency offset in Hz", "counter_slider", float, QtCore.Qt.Horizontal)
+        self.tab_channel_grid_layout_0.addWidget(self._f_offset_win, 2, 0, 1, 1)
+        for r in range(2, 3):
+            self.tab_channel_grid_layout_0.setRowStretch(r, 1)
+        for c in range(0, 1):
+            self.tab_channel_grid_layout_0.setColumnStretch(c, 1)
         self._amplitude_range = qtgui.Range(0, 5, 100e-3, 1, 200)
         self._amplitude_win = qtgui.RangeWidget(self._amplitude_range, self.set_amplitude, "Amplitude", "counter_slider", float, QtCore.Qt.Horizontal)
-        self.top_layout.addWidget(self._amplitude_win)
+        self.tab_source_grid_layout_0.addWidget(self._amplitude_win, 1, 0, 1, 1)
+        for r in range(1, 2):
+            self.tab_source_grid_layout_0.setRowStretch(r, 1)
+        for c in range(0, 1):
+            self.tab_source_grid_layout_0.setColumnStretch(c, 1)
         self.qtgui_time_sink_x_0 = qtgui.time_sink_c(
             1024, #size
             samp_rate, #samp_rate
@@ -190,6 +241,13 @@ class Practica_1_A(gr.top_block, Qt.QWidget):
 
         self._qtgui_freq_sink_x_0_win = sip.wrapinstance(self.qtgui_freq_sink_x_0.qwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_freq_sink_x_0_win)
+        self.channels_channel_model_0 = channels.channel_model(
+            noise_voltage=noise,
+            frequency_offset=f_offset,
+            epsilon=1.0,
+            taps=[1.0],
+            noise_seed=0,
+            block_tags=False)
         self.blocks_throttle2_0 = blocks.throttle( gr.sizeof_gr_complex*1, samp_rate, True, 0 if "auto" == "auto" else max( int(float(0.1) * samp_rate) if "auto" == "time" else int(0.1), 1) )
         self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, waveform, frequency, amplitude, offset, 0)
 
@@ -197,9 +255,10 @@ class Practica_1_A(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.analog_sig_source_x_0, 0), (self.blocks_throttle2_0, 0))
+        self.connect((self.analog_sig_source_x_0, 0), (self.channels_channel_model_0, 0))
         self.connect((self.blocks_throttle2_0, 0), (self.qtgui_freq_sink_x_0, 0))
         self.connect((self.blocks_throttle2_0, 0), (self.qtgui_time_sink_x_0, 0))
+        self.connect((self.channels_channel_model_0, 0), (self.blocks_throttle2_0, 0))
 
 
     def closeEvent(self, event):
@@ -235,12 +294,26 @@ class Practica_1_A(gr.top_block, Qt.QWidget):
         self.offset = offset
         self.analog_sig_source_x_0.set_offset(self.offset)
 
+    def get_noise(self):
+        return self.noise
+
+    def set_noise(self, noise):
+        self.noise = noise
+        self.channels_channel_model_0.set_noise_voltage(self.noise)
+
     def get_frequency(self):
         return self.frequency
 
     def set_frequency(self, frequency):
         self.frequency = frequency
         self.analog_sig_source_x_0.set_frequency(self.frequency)
+
+    def get_f_offset(self):
+        return self.f_offset
+
+    def set_f_offset(self, f_offset):
+        self.f_offset = f_offset
+        self.channels_channel_model_0.set_frequency_offset(self.f_offset)
 
     def get_amplitude(self):
         return self.amplitude

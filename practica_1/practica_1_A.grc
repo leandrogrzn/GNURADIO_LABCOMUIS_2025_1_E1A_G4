@@ -37,7 +37,7 @@ blocks:
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: ''
+    gui_hint: tab_source@0:1,0
     label: Amplitude
     min_len: '200'
     orient: QtCore.Qt.Horizontal
@@ -54,11 +54,32 @@ blocks:
     coordinate: [296, 16.0]
     rotation: 0
     state: enabled
+- name: f_offset
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: tab_channel@0:2,0
+    label: Frequency offset in Hz
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '0.1'
+    stop: 1e3
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1120, 128.0]
+    rotation: 0
+    state: enabled
 - name: frequency
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: ''
+    gui_hint: tab_source@0:2,0
     label: Frequency in Hz
     min_len: '200'
     orient: QtCore.Qt.Horizontal
@@ -75,11 +96,32 @@ blocks:
     coordinate: [440, 16.0]
     rotation: 0
     state: enabled
+- name: noise
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: tab_channel@0:1,0
+    label: Noise Voltage
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '0.01'
+    stop: '5'
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1144, 272.0]
+    rotation: 0
+    state: enabled
 - name: offset
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: ''
+    gui_hint: tab_source@0:1,1
     label: Offset
     min_len: '200'
     orient: QtCore.Qt.Horizontal
@@ -158,7 +200,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [120, 240.0]
+    coordinate: [56, 240.0]
     rotation: 0
     state: enabled
 - name: blocks_throttle2_0
@@ -179,7 +221,28 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [408, 272.0]
+    coordinate: [584, 272.0]
+    rotation: 0
+    state: enabled
+- name: channels_channel_model_0
+  id: channels_channel_model
+  parameters:
+    affinity: ''
+    alias: ''
+    block_tags: 'False'
+    comment: ''
+    epsilon: '1.0'
+    freq_offset: f_offset
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    noise_voltage: noise
+    seed: '0'
+    taps: '1.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 240.0]
     rotation: 0
     state: enabled
 - name: qtgui_freq_sink_x_0
@@ -260,7 +323,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [760, 168.0]
+    coordinate: [880, 216.0]
     rotation: 0
     state: enabled
 - name: qtgui_time_sink_x_0
@@ -357,14 +420,83 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [768, 368.0]
+    coordinate: [880, 304.0]
+    rotation: 0
+    state: enabled
+- name: tab_channel
+  id: qtgui_tab_widget
+  parameters:
+    alias: ''
+    comment: ''
+    gui_hint: 0,2,3,1
+    label0: Channel Controls
+    label1: Tab 1
+    label10: Tab 10
+    label11: Tab 11
+    label12: Tab 12
+    label13: Tab 13
+    label14: Tab 14
+    label15: Tab 15
+    label16: Tab 16
+    label17: Tab 17
+    label18: Tab 18
+    label19: Tab 19
+    label2: Tab 2
+    label3: Tab 3
+    label4: Tab 4
+    label5: Tab 5
+    label6: Tab 6
+    label7: Tab 7
+    label8: Tab 8
+    label9: Tab 9
+    num_tabs: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1056, 24.0]
+    rotation: 0
+    state: enabled
+- name: tab_source
+  id: qtgui_tab_widget
+  parameters:
+    alias: ''
+    comment: ''
+    gui_hint: 0,0,3,2
+    label0: Source Controls
+    label1: Tab 1
+    label10: Tab 10
+    label11: Tab 11
+    label12: Tab 12
+    label13: Tab 13
+    label14: Tab 14
+    label15: Tab 15
+    label16: Tab 16
+    label17: Tab 17
+    label18: Tab 18
+    label19: Tab 19
+    label2: Tab 2
+    label3: Tab 3
+    label4: Tab 4
+    label5: Tab 5
+    label6: Tab 6
+    label7: Tab 7
+    label8: Tab 8
+    label9: Tab 9
+    num_tabs: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [904, 24.0]
     rotation: 0
     state: enabled
 
 connections:
-- [analog_sig_source_x_0, '0', blocks_throttle2_0, '0']
+- [analog_sig_source_x_0, '0', channels_channel_model_0, '0']
 - [blocks_throttle2_0, '0', qtgui_freq_sink_x_0, '0']
 - [blocks_throttle2_0, '0', qtgui_time_sink_x_0, '0']
+- [channels_channel_model_0, '0', blocks_throttle2_0, '0']
 
 metadata:
   file_format: 1
