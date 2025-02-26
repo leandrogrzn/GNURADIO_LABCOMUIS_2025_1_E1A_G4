@@ -68,13 +68,13 @@ class simple_flowgraph(gr.top_block, Qt.QWidget):
         # Variables
         ##################################################
         self.waveform = waveform = 102
-        self.samp_rate = samp_rate = 32000
+        self.source_type = source_type = 1
+        self.samp_rate = samp_rate = 1e6
         self.phase = phase = 0
         self.offset = offset = 0
         self.noise = noise = 0
         self.frequency = frequency = 1e3
         self.fc = fc = 100
-        self.f_offset = f_offset = 0
         self.amplitude = amplitude = 1
         self.GTX = GTX = 30
 
@@ -130,7 +130,27 @@ class simple_flowgraph(gr.top_block, Qt.QWidget):
         self._waveform_combo_box.currentIndexChanged.connect(
             lambda i: self.set_waveform(self._waveform_options[i]))
         # Create the radio buttons
-        self.tab_source_grid_layout_0.addWidget(self._waveform_tool_bar, 0, 0, 1, 1)
+        self.tab_source_grid_layout_0.addWidget(self._waveform_tool_bar, 0, 1, 1, 1)
+        for r in range(0, 1):
+            self.tab_source_grid_layout_0.setRowStretch(r, 1)
+        for c in range(1, 2):
+            self.tab_source_grid_layout_0.setColumnStretch(c, 1)
+        # Create the options list
+        self._source_type_options = [0, 1]
+        # Create the labels list
+        self._source_type_labels = ['Complex', 'Float']
+        # Create the combo box
+        self._source_type_tool_bar = Qt.QToolBar(self)
+        self._source_type_tool_bar.addWidget(Qt.QLabel("Source Type" + ": "))
+        self._source_type_combo_box = Qt.QComboBox()
+        self._source_type_tool_bar.addWidget(self._source_type_combo_box)
+        for _label in self._source_type_labels: self._source_type_combo_box.addItem(_label)
+        self._source_type_callback = lambda i: Qt.QMetaObject.invokeMethod(self._source_type_combo_box, "setCurrentIndex", Qt.Q_ARG("int", self._source_type_options.index(i)))
+        self._source_type_callback(self.source_type)
+        self._source_type_combo_box.currentIndexChanged.connect(
+            lambda i: self.set_source_type(self._source_type_options[i]))
+        # Create the radio buttons
+        self.tab_source_grid_layout_0.addWidget(self._source_type_tool_bar, 0, 0, 1, 1)
         for r in range(0, 1):
             self.tab_source_grid_layout_0.setRowStretch(r, 1)
         for c in range(0, 1):
@@ -170,13 +190,6 @@ class simple_flowgraph(gr.top_block, Qt.QWidget):
             self.tab_usrp_grid_layout_0.setRowStretch(r, 1)
         for c in range(0, 1):
             self.tab_usrp_grid_layout_0.setColumnStretch(c, 1)
-        self._f_offset_range = qtgui.Range(0, 1e3, 0.1, 0, 200)
-        self._f_offset_win = qtgui.RangeWidget(self._f_offset_range, self.set_f_offset, "Frequency offset in Hz", "counter_slider", float, QtCore.Qt.Horizontal)
-        self.tab_channel_grid_layout_0.addWidget(self._f_offset_win, 2, 0, 1, 1)
-        for r in range(2, 3):
-            self.tab_channel_grid_layout_0.setRowStretch(r, 1)
-        for c in range(0, 1):
-            self.tab_channel_grid_layout_0.setColumnStretch(c, 1)
         self._amplitude_range = qtgui.Range(0, 5, 0.1, 1, 200)
         self._amplitude_win = qtgui.RangeWidget(self._amplitude_range, self.set_amplitude, "Amplitude", "counter_slider", float, QtCore.Qt.Horizontal)
         self.tab_source_grid_layout_0.addWidget(self._amplitude_win, 1, 0, 1, 1)
@@ -241,7 +254,7 @@ class simple_flowgraph(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setColumnStretch(c, 1)
         self.qtgui_freq_sink_x_0 = qtgui.freq_sink_c(
             1024, #size
-            window.WIN_BLACKMAN_hARRIS, #wintype
+            window.WIN_RECTANGULAR, #wintype
             0, #fc
             samp_rate, #bw
             "", #name
@@ -287,12 +300,16 @@ class simple_flowgraph(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setColumnStretch(c, 1)
         self.channels_channel_model_0 = channels.channel_model(
             noise_voltage=noise,
-            frequency_offset=f_offset,
+            frequency_offset=0,
             epsilon=1.0,
             taps=[1.0],
             noise_seed=0,
             block_tags=False)
         self.blocks_throttle2_0 = blocks.throttle( gr.sizeof_gr_complex*1, samp_rate, True, 0 if "auto" == "auto" else max( int(float(0.1) * samp_rate) if "auto" == "time" else int(0.1), 1) )
+        self.blocks_selector_0 = blocks.selector(gr.sizeof_gr_complex*1,source_type,0)
+        self.blocks_selector_0.set_enabled(True)
+        self.blocks_float_to_complex_0 = blocks.float_to_complex(1)
+        self.analog_sig_source_x_0_0 = analog.sig_source_f(samp_rate, waveform, frequency, amplitude, offset, phase)
         self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, waveform, frequency, amplitude, offset, phase)
         self._GTX_range = qtgui.Range(0, 30, 1, 30, 200)
         self._GTX_win = qtgui.RangeWidget(self._GTX_range, self.set_GTX, "Tx gain in dB", "counter_slider", float, QtCore.Qt.Horizontal)
@@ -306,7 +323,10 @@ class simple_flowgraph(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.analog_sig_source_x_0, 0), (self.channels_channel_model_0, 0))
+        self.connect((self.analog_sig_source_x_0, 0), (self.blocks_selector_0, 0))
+        self.connect((self.analog_sig_source_x_0_0, 0), (self.blocks_float_to_complex_0, 0))
+        self.connect((self.blocks_float_to_complex_0, 0), (self.blocks_selector_0, 1))
+        self.connect((self.blocks_selector_0, 0), (self.channels_channel_model_0, 0))
         self.connect((self.blocks_throttle2_0, 0), (self.qtgui_freq_sink_x_0, 0))
         self.connect((self.blocks_throttle2_0, 0), (self.qtgui_time_sink_x_0, 0))
         self.connect((self.channels_channel_model_0, 0), (self.blocks_throttle2_0, 0))
@@ -327,6 +347,15 @@ class simple_flowgraph(gr.top_block, Qt.QWidget):
         self.waveform = waveform
         self._waveform_callback(self.waveform)
         self.analog_sig_source_x_0.set_waveform(self.waveform)
+        self.analog_sig_source_x_0_0.set_waveform(self.waveform)
+
+    def get_source_type(self):
+        return self.source_type
+
+    def set_source_type(self, source_type):
+        self.source_type = source_type
+        self._source_type_callback(self.source_type)
+        self.blocks_selector_0.set_input_index(self.source_type)
 
     def get_samp_rate(self):
         return self.samp_rate
@@ -334,6 +363,7 @@ class simple_flowgraph(gr.top_block, Qt.QWidget):
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
         self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
+        self.analog_sig_source_x_0_0.set_sampling_freq(self.samp_rate)
         self.blocks_throttle2_0.set_sample_rate(self.samp_rate)
         self.qtgui_freq_sink_x_0.set_frequency_range(0, self.samp_rate)
         self.qtgui_time_sink_x_0.set_samp_rate(self.samp_rate)
@@ -344,6 +374,7 @@ class simple_flowgraph(gr.top_block, Qt.QWidget):
     def set_phase(self, phase):
         self.phase = phase
         self.analog_sig_source_x_0.set_phase(self.phase)
+        self.analog_sig_source_x_0_0.set_phase(self.phase)
 
     def get_offset(self):
         return self.offset
@@ -351,6 +382,7 @@ class simple_flowgraph(gr.top_block, Qt.QWidget):
     def set_offset(self, offset):
         self.offset = offset
         self.analog_sig_source_x_0.set_offset(self.offset)
+        self.analog_sig_source_x_0_0.set_offset(self.offset)
 
     def get_noise(self):
         return self.noise
@@ -365,6 +397,7 @@ class simple_flowgraph(gr.top_block, Qt.QWidget):
     def set_frequency(self, frequency):
         self.frequency = frequency
         self.analog_sig_source_x_0.set_frequency(self.frequency)
+        self.analog_sig_source_x_0_0.set_frequency(self.frequency)
 
     def get_fc(self):
         return self.fc
@@ -372,19 +405,13 @@ class simple_flowgraph(gr.top_block, Qt.QWidget):
     def set_fc(self, fc):
         self.fc = fc
 
-    def get_f_offset(self):
-        return self.f_offset
-
-    def set_f_offset(self, f_offset):
-        self.f_offset = f_offset
-        self.channels_channel_model_0.set_frequency_offset(self.f_offset)
-
     def get_amplitude(self):
         return self.amplitude
 
     def set_amplitude(self, amplitude):
         self.amplitude = amplitude
         self.analog_sig_source_x_0.set_amplitude(self.amplitude)
+        self.analog_sig_source_x_0_0.set_amplitude(self.amplitude)
 
     def get_GTX(self):
         return self.GTX

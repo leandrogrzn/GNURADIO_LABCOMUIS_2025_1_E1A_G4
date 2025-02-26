@@ -51,7 +51,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [584, 820.0]
+    coordinate: [976, 844.0]
     rotation: 0
     state: enabled
 - name: amplitude
@@ -72,28 +72,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [392, 148.0]
-    rotation: 0
-    state: enabled
-- name: f_offset
-  id: variable_qtgui_range
-  parameters:
-    comment: "Error de frecuencia \nen la transmisi\xF3n"
-    gui_hint: tab_channel@0:2,0
-    label: Frequency offset in Hz
-    min_len: '200'
-    orient: QtCore.Qt.Horizontal
-    rangeType: float
-    start: '0'
-    step: '0.1'
-    stop: 1e3
-    value: '0'
-    widget: counter_slider
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1208, 148.0]
+    coordinate: [520, 148.0]
     rotation: 0
     state: enabled
 - name: fc
@@ -114,7 +93,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [376, 820.0]
+    coordinate: [752, 844.0]
     rotation: 0
     state: enabled
 - name: frequency
@@ -135,7 +114,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [536, 148.0]
+    coordinate: [704, 148.0]
     rotation: 0
     state: enabled
 - name: noise
@@ -156,7 +135,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1056, 148.0]
+    coordinate: [1288, 148.0]
     rotation: 0
     state: enabled
 - name: offset
@@ -177,7 +156,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [704, 148.0]
+    coordinate: [912, 148.0]
     rotation: 180
     state: enabled
 - name: phase
@@ -198,7 +177,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [848, 148.0]
+    coordinate: [1096, 148.0]
     rotation: 0
     state: enabled
 - name: samp_rate
@@ -206,7 +185,7 @@ blocks:
   parameters:
     comment: "Bloque usado para configurar \nvalores de variables que no se\nvan a\
       \ actualizar durante la ejecuci\xF3n"
-    value: '32000'
+    value: 1e6
   states:
     bus_sink: false
     bus_source: false
@@ -214,11 +193,42 @@ blocks:
     coordinate: [240, 8.0]
     rotation: 0
     state: enabled
+- name: source_type
+  id: variable_qtgui_chooser
+  parameters:
+    comment: "Bloque usado para cambiar \nel tipo de dato de la fuente\n(complejo\
+      \ o flotante)"
+    gui_hint: tab_source@0:0,0
+    label: Source Type
+    label0: ''
+    label1: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    labels: '["Complex", "Float"]'
+    num_opts: '0'
+    option0: '0'
+    option1: '1'
+    option2: '2'
+    option3: '3'
+    option4: '4'
+    options: '[0, 1]'
+    orient: Qt.QVBoxLayout
+    type: raw
+    value: '1'
+    widget: combo_box
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [72, 148.0]
+    rotation: 0
+    state: enabled
 - name: waveform
   id: variable_qtgui_chooser
   parameters:
     comment: "Bloque usado para cambiar \nlos tipos de formas de onda"
-    gui_hint: tab_source@0:0,0
+    gui_hint: tab_source@0:0,1
     label: Waveform
     label0: ''
     label1: ''
@@ -241,7 +251,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [152, 148.0]
+    coordinate: [280, 148.0]
     rotation: 0
     state: enabled
 - name: analog_sig_source_x_0
@@ -250,7 +260,7 @@ blocks:
     affinity: ''
     alias: ''
     amp: amplitude
-    comment: "Fuente virtual, \ngenera diferentes formas de onda"
+    comment: "Fuente virtual COMPLEJA, \ngenera diferentes formas de onda"
     freq: frequency
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -264,7 +274,69 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [64, 380.0]
+    coordinate: [64, 468.0]
+    rotation: 0
+    state: enabled
+- name: analog_sig_source_x_0_0
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: amplitude
+    comment: "Fuente virtual REAL, \ngenera diferentes formas de onda"
+    freq: frequency
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: offset
+    phase: phase
+    samp_rate: samp_rate
+    showports: 'False'
+    type: float
+    waveform: waveform
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [64, 780.0]
+    rotation: 0
+    state: enabled
+- name: blocks_float_to_complex_0
+  id: blocks_float_to_complex
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312.0, 640]
+    rotation: 90
+    state: enabled
+- name: blocks_selector_0
+  id: blocks_selector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    enabled: 'True'
+    input_index: source_type
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    num_outputs: '1'
+    output_index: '0'
+    showports: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [448, 492.0]
     rotation: 0
     state: enabled
 - name: blocks_throttle2_0
@@ -287,7 +359,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [608, 416.0]
+    coordinate: [1040, 440.0]
     rotation: 0
     state: enabled
 - name: channels_channel_model_0
@@ -298,7 +370,7 @@ blocks:
     block_tags: 'False'
     comment: "Bloque usado para \ncrear un modelo de \ncanal"
     epsilon: '1.0'
-    freq_offset: f_offset
+    freq_offset: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
     noise_voltage: noise
@@ -308,7 +380,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [360, 380.0]
+    coordinate: [736, 404.0]
     rotation: 0
     state: enabled
 - name: import_1
@@ -395,14 +467,14 @@ blocks:
     width7: '1'
     width8: '1'
     width9: '1'
-    wintype: window.WIN_BLACKMAN_hARRIS
+    wintype: window.WIN_RECTANGULAR
     ymax: '10'
     ymin: '-140'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [888, 684.0]
+    coordinate: [1240, 708.0]
     rotation: 0
     state: enabled
 - name: qtgui_time_sink_x_0
@@ -499,7 +571,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [888, 572.0]
+    coordinate: [1240, 596.0]
     rotation: 0
     state: enabled
 - name: tab_channel
@@ -878,33 +950,33 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [368, 668.0]
+    coordinate: [744, 692.0]
     rotation: 0
     state: disabled
 - name: virtual_sink_0
   id: virtual_sink
   parameters:
     alias: ''
-    comment: ''
+    comment: Source + Channel model
     stream_id: source
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [840, 424.0]
+    coordinate: [1280, 448.0]
     rotation: 0
     state: enabled
 - name: virtual_sink_0_0
   id: virtual_sink
   parameters:
     alias: ''
-    comment: ''
+    comment: Source without channel model
     stream_id: source
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [368, 592.0]
+    coordinate: [744, 616.0]
     rotation: 0
     state: disabled
 - name: virtual_source_0
@@ -917,14 +989,17 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [624, 640.0]
+    coordinate: [1000, 664.0]
     rotation: 0
     state: enabled
 
 connections:
-- [analog_sig_source_x_0, '0', channels_channel_model_0, '0']
-- [analog_sig_source_x_0, '0', uhd_usrp_sink_0_0, '0']
-- [analog_sig_source_x_0, '0', virtual_sink_0_0, '0']
+- [analog_sig_source_x_0, '0', blocks_selector_0, '0']
+- [analog_sig_source_x_0_0, '0', blocks_float_to_complex_0, '0']
+- [blocks_float_to_complex_0, '0', blocks_selector_0, '1']
+- [blocks_selector_0, '0', channels_channel_model_0, '0']
+- [blocks_selector_0, '0', uhd_usrp_sink_0_0, '0']
+- [blocks_selector_0, '0', virtual_sink_0_0, '0']
 - [blocks_throttle2_0, '0', virtual_sink_0, '0']
 - [channels_channel_model_0, '0', blocks_throttle2_0, '0']
 - [virtual_source_0, '0', qtgui_freq_sink_x_0, '0']
