@@ -2,11 +2,13 @@
 ### Integrantes
 - **Leandro José Garzón Niteto** - 2194232
 - **David Josué Díaz Ortiz** - 2204269
+
 Escuela de Ingenierías Eléctrica, Electrónica y de Telecomunicaciones  
 Universidad Industrial de Santander
 
 ### Fecha
 5 de Marzo de 2025
+
 ---
 
 ## Declaración de Originalidad y Responsabilidad
@@ -31,7 +33,70 @@ En las telecomunicaciones, entender cómo se comportan las señales es clave par
 ### Procedimiento
 Para llevar a cabo esta práctica, se realizaron tres actividades principales: la revisión y configuración de los equipos de medición, la simulación de señales en GNU Radio y la transmisión y análisis de señales con el USRP 2920. A continuación, se detallan los pasos a seguir en cada actividad:
 
+## **Actividad 1: Revisión de Especificaciones de los Equipos**
+Para llevar a cabo esta practica primero se realizo una revision detallada de los equipos de laboratorio con el objetivo de comprender su fincionamiento y configuraciones clave, a partie de esto se consultaron los manuales del GNU Radio, el osciloscopio y el analizador de espectros para conocer sus especificaciones tecnicas y las funciones de control mas relevantes de estos dispositivos.
 
+### **Evidencia**
+- Lista con las 5 especificaciones más relevantes de cada equipo.
+#### **Osciloscopio(R&s RTB2004):**
+1. Ancho de banda: Tiene disponible bandas de 70MHz a 300MHz.
+2. Velocidad de muestreo: Tiene una velocidad de muestreo de hasta 2.5 GSa/s (gigasamples por segundo).
+3. Memoria profunda de canal: Ofrece una memoria de adquisicion en el modo normal de 10 Mpts y en el modo intercalado de 20 Mpts.
+4. Pantalla: Cuenta con una pantalla tactil de 10.1 pulgadas.
+5. Conectividad: Dispone de puertos LAN y USB para control remoto y transferencia de datos.
+#### **Analizador de espectros(R&S FPC1000):**
+1. Rango de frecuancias: Cuenta con un rango de frecuencias de 5KHz a 1GHz.
+2. Resolucion de ancho de banda: Ajustable entre 1Hz y 3MHz.
+3. Maximo nivel de entrada: Hasta 36dBm(4 W).
+4. Nivel de barrido: Ajustable manualmente o modo automatico desde 20ms hasta 600MHz de ancho de banda.
+5. Pantalla y conectividad: Posee una pantalla de 10.1 pulgadas, interfaz USB y conectividad WI-FI. 
+#### **USRP-2920:**
+1. Rango de frecuencias: Soporta señales desde 50MHz hasta 2.2GHz.
+2. Ancho de banda: Dependiendo del muestreo el ancho de banda puede ser de hasta 20MHz con 16 bits y 40MHz con 8 bits.
+3. Potencia de salida maxima: Varia segun la frecuencia:
+ - de 50 MHz a 1.2 GHz: entre 50 mW a 100 mW(17dBm a 20dBm)
+ - de 1.2 GHz a 2.2 GHz: entre 30 mW a 70 mW(15dBm a 18dBm)
+4. Rango de ganancia: Desde 0 dB a 31.5 dB.
+5. Potencia:
+ - tipica: 12 W hasta 15 W.
+ - maxima: 18 W. 
+
+## **Actividad 2: Simulación de Señales en GNU Radio**
+Para  llavar a cabo la simulacion de señales se utilizo GNU Radio, configurando y ejecutando un flujograma, identificando los bloques claves y ajustando las frecuencias de muestreo correspondientes a la practica. Se analizaron las señales en el dominio del tiempo y de la frecuencia observando la relacion entre los bloques y los resultados obtenidos, evaluando el impacto al modificar los parametros como el tipo de dato (complejo o flotante), forma de onda, frecuencia, fase, amplitud y nivel de ruido.
+
+### **Evidencia**
+- Capturas de pantalla de las señales generadas en el dominio del tiempo y la frecuencia.
+
+La diferencia matematica entre una señal flotante y una comleja tomando como referencia un coseno se puede describir de la siguiente manera:
+
+- Fuente flotante real
+$$ x(t) = A\cos^2(2 \pi f t + \phi) $$
+Donde A es la amplitud, f es la frecuencia y phi la fase. Esta señal tiene dos picos espectrales de +/- f debido a la entidad de euler, esto hace que se refleje en el espectro como dos componentes simetricas.
+
+- Fuente compleja
+$$ x_{c}(t) = A e^{j(2 \pi f t + \phi)} $$
+$$ e^{j(2 \pi f t + \phi)} = \cos(2 \pi f t) + j \sin(2 \pi f t) $$
+
+Esta en el dominio de la frecuencia solo tiene un pico en la frecuancia f, eliminando la componente negativa.
+
+
+#### Coseno complejo
+<img src="./capturas/coseno_complex.png" alt="Coseno complejo" width="600">
+
+#### Coseno flotante
+<img src="./capturas/coseno_float.png" alt="Coseno complejo" width="600">
+
+#### Triangular complejo
+<img src="./capturas/triangular_complex.png" alt="triangular_complex" width="600">
+
+#### Triangular flotante
+<img src="./capturas/triangular_float.png" alt="triangular_float" width="600">
+
+#### Cuadrada complejo
+<img src="./capturas/cuadrada_complex.png" alt="cuadrada_complex" width="600">
+
+#### Cuadrada flotante
+<img src="./capturas/cuadrada_float.png" alt="cuadrada_float" width="600">
 
 
 
