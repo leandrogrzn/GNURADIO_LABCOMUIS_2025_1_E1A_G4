@@ -6,7 +6,7 @@
 #
 # GNU Radio Python Flow Graph
 # Title: Practica_1_A
-# GNU Radio version: 3.10.9.2
+# GNU Radio version: 3.10.10.0
 
 from PyQt5 import Qt
 from gnuradio import qtgui
