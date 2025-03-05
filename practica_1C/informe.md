@@ -16,7 +16,7 @@ Los autores de este informe certifican que el contenido aquí presentado es orig
 
 Asimismo, los autores asumen plena responsabilidad por la información contenida en este documento. 
 
-Uso de IA: [Indicar si se usó IA y para qué aspectos específicos, por ejemplo: "Se utilizó ChatGPT para reformular secciones del texto y verificar gramática, pero el contenido técnico fue desarrollado íntegramente por los autores."]
+Se utilizó ChatGPT para la corrección ortográfica, gramatical y de puntuación del texto, asegurando claridad y coherencia. No obstante, el contenido técnico y la interpretación de los resultados fueron desarrollados íntegramente por los autores.
 
 ---
 
@@ -80,24 +80,17 @@ $$ e^{j(2 \pi f t + \phi)} = \cos(2 \pi f t) + j \sin(2 \pi f t) $$
 
 En el dominio de la frecuencia, solo tiene un pico en la frecuencia f, eliminando la componente negativa.
 
+| <img src="./capturas/coseno_complex.png" alt="cos_float" width="300" height="150"> | <img src="./capturas/coseno_float.png" alt="cos_float" width="300" height="150"> |
+|:---------------------------------------------------------------:|:-----------------------------------------------------------------:|
+| **Coseno complejo** | **Coseno flotante** |
 
-#### Coseno complejo
-<img src="./capturas/coseno_complex.png" alt="Coseno complejo" width="600">
+| <img src="./capturas/triangular_complex.png" alt="cos_float" width="300" height="150"> | <img src="./capturas/triangular_float.png" alt="cos_float" width="300" height="150"> |
+|:---------------------------------------------------------------:|:-----------------------------------------------------------------:|
+| **Triangular complejo** | **Triangular flotante** |
 
-#### Coseno flotante
-<img src="./capturas/coseno_float.png" alt="Coseno complejo" width="600">
-
-#### Triangular complejo
-<img src="./capturas/triangular_complex.png" alt="triangular_complex" width="600">
-
-#### Triangular flotante
-<img src="./capturas/triangular_float.png" alt="triangular_float" width="600">
-
-#### Cuadrada complejo
-<img src="./capturas/cuadrada_complex.png" alt="cuadrada_complex" width="600">
-
-#### Cuadrada flotante
-<img src="./capturas/cuadrada_float.png" alt="cuadrada_float" width="600">
+| <img src="./capturas/cuadrada_complex.png" alt="cos_float" width="300" height="150"> | <img src="./capturas/cuadrada_float.png" alt="cos_float" width="300" height="150"> |
+|:---------------------------------------------------------------:|:-----------------------------------------------------------------:|
+| **Cuadrada complejo** | **Cuadrada flotante** |
 
 ## **Actividad 3: Transmisión y Medición de Señales con el USRP 2920**
 En esta actividad, se exploró la transmisión y medición de señales con el USRP 2920, un sistema de radio definido por software (SDR). Se configuró el equipo en GNU Radio para transmitir señales y analizar su comportamiento en el dominio del tiempo y de la frecuencia. Se midieron parámetros clave, como la potencia, el ancho de banda, el piso de ruido y la relación señal a ruido (SNR), utilizando un analizador de espectros y un osciloscopio. Finalmente, se compararon diferentes configuraciones y medios de transmisión para evaluar el impacto en la calidad de la señal.
