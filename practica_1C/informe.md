@@ -23,33 +23,33 @@ Uso de IA: [Indicar si se usó IA y para qué aspectos específicos, por ejemplo
 ## Contenido
 
 ### Resumen
-Esta practica se enfoco en la medicion de potencia y frecuencia en sistemas de radio definidos por dicho software el cual se utilizo GNU Radio y equipos especializados como el osciloscopio y el analizador de espectros. En la cual se realizaron las actividades propuestas por la guia para comprender el comportamiento de estas señales en el dominio del tiempo y frecuencia. Para llevar a cabo esta practica primero se revisaron las especificaciones de los equipos, identificando parametros claves como rango de frecuencia y ganancia. Luego de esto se simularon las señales en GNU Radio para anallizar su comportamiento al modificar caracteristicas como forma de onda y amplitud. Posteriormente se transmitieron señales con el GNU Radio evaluando potencia, ancho de banda y relacion señal a ruido mediante mediciones con el analizador de espectros y el osciloscopio. Finalmente se compararon los resultados de simulacion y experimentacion.
+Esta práctica se enfocó en la medición de potencia y frecuencia en sistemas de radio definidos por dicho software, el cual se utilizó GNU Radio y equipos especializados, como el osciloscopio y el analizador de espectros. En la cual se realizaron las actividades propuestas por la guía para comprender el comportamiento de estas señales en el dominio del tiempo y frecuencia. Para llevar a cabo esta práctica, primero se revisaron las especificaciones de los equipos, identificando parámetros claves como rango de frecuencia y ganancia. Luego de esto, se simularon las señales en GNU Radio para analizar su comportamiento al modificar características como forma de onda y amplitud. Posteriormente, se transmitieron señales con el GNU Radio, evaluando potencia, ancho de banda y relación señal a ruido mediante mediciones con el analizador de espectros y el osciloscopio. Finalmente, se compararon los resultados de simulación y experimentación.
 
 **Palabras clave:** Relacion señal a ruido (SNR), Ganancia, Frecuencia.
 
 ### Introducción
-En las telecomunicaciones, entender cómo se comportan las señales es clave para garantizar una transmisión eficiente. En esta práctica, se exploró el uso del radio definido por software (SDR) USRP 2920 y su comparación con el analizador de espectros R&S FPC1000 para evaluar su rango de frecuencia. Además, se configuraron parámetros como la frecuencia de transmisión y la ganancia del GNU Radio, analizando su impacto en la señal generada. También se utilizó un osciloscopio R&S RTB2004 para medir la amplitud y la frecuencia en el dominio del tiempo, comparándolo con el análisis en el dominio de la frecuencia usando el analizador de espectros. Finalmente, se estudió el concepto de piso de ruido y cómo factores como la frecuencia central, el SPAN y la resolución de ancho de banda (RBW) afectan su medición, lo que es esencial para la detección de señales débiles en entornos reales.
+En las telecomunicaciones, entender cómo se comportan las señales es clave para garantizar una transmisión eficiente. En esta práctica se exploró el uso del radio definido por software (SDR) USRP 2920 y su comparación con el analizador de espectros R&S FPC1000 para evaluar su rango de frecuencias. Además, se configuraron parámetros, como la frecuencia de transmisión y la ganancia del GNU Radio, analizando su impacto en la señal generada. También se utilizó un osciloscopio R&S RTB2004 para medir la amplitud y la frecuencia en el dominio del tiempo, comparándolo con el análisis en el dominio de la frecuencia, usando el analizador de espectros. Finalmente, se estudió el concepto de piso de ruido y cómo factores, como la frecuencia central, el SPAN y la resolución de ancho de banda (RBW), afectan su medición, lo que es esencial para la detección de señales débiles en entornos reales.
 
 ### Procedimiento
-Para llevar a cabo esta práctica, se realizaron tres actividades principales: la revisión y configuración de los equipos de medición, la simulación de señales en GNU Radio y la transmisión y análisis de señales con el USRP 2920. A continuación, se detallan los pasos a seguir en cada actividad:
+Para llevar a cabo esta práctica, se realizaron tres actividades principales: la revisión y configuración de los equipos de medición, la simulación de señales en GNU Radio y la transmisión y análisis de señales con el USRP 2920. A continuación, se detallan los pasos a seguir en cada actividad:
 
 ## **Actividad 1: Revisión de Especificaciones de los Equipos**
-Para llevar a cabo esta practica primero se realizo una revision detallada de los equipos de laboratorio con el objetivo de comprender su fincionamiento y configuraciones clave, a partie de esto se consultaron los manuales del GNU Radio, el osciloscopio y el analizador de espectros para conocer sus especificaciones tecnicas y las funciones de control mas relevantes de estos dispositivos.
+Para llevar a cabo esta práctica, primero se realizó una revisión detallada de los equipos de laboratorio con el objetivo de comprender su funcionamiento y configuraciones clave. A partir de esto, se consultaron los manuales del GNU Radio, el osciloscopio y el analizador de espectros para conocer sus especificaciones técnicas y las funciones de control más relevantes de estos dispositivos.
 
 ### **Evidencia**
 - Lista con las 5 especificaciones más relevantes de cada equipo.
 #### **Osciloscopio(R&s RTB2004):**
-1. Ancho de banda: Tiene disponible bandas de 70MHz a 300MHz.
-2. Velocidad de muestreo: Tiene una velocidad de muestreo de hasta 2.5 GSa/s (gigasamples por segundo).
-3. Memoria profunda de canal: Ofrece una memoria de adquisicion en el modo normal de 10 Mpts y en el modo intercalado de 20 Mpts.
-4. Pantalla: Cuenta con una pantalla tactil de 10.1 pulgadas.
-5. Conectividad: Dispone de puertos LAN y USB para control remoto y transferencia de datos.
+1. Ancho de banda: tiene disponibles bandas de 70 MHz a 300 MHz.
+2. Velocidad de muestreo: tiene una velocidad de muestreo de hasta 2.5 GSa/s (gigasamples por segundo).
+3. Memoria profunda de canal: ofrece una memoria de adquisición en el modo normal de 10 Mpts y en el modo intercalado de 20 Mpts.
+4. Pantalla: cuenta con una pantalla táctil de 10.1 pulgadas.
+5. Conectividad: dispone de puertos LAN y USB para control remoto y transferencia de datos.
 #### **Analizador de espectros(R&S FPC1000):**
-1. Rango de frecuancias: Cuenta con un rango de frecuencias de 5KHz a 1GHz.
-2. Resolucion de ancho de banda: Ajustable entre 1Hz y 3MHz.
-3. Maximo nivel de entrada: Hasta 36dBm(4 W).
-4. Nivel de barrido: Ajustable manualmente o modo automatico desde 20ms hasta 600MHz de ancho de banda.
-5. Pantalla y conectividad: Posee una pantalla de 10.1 pulgadas, interfaz USB y conectividad WI-FI. 
+1. Rango de frecuencias: cuenta con un rango de frecuencias de 5 kHz a 1 GHz.
+2. Resolución de ancho de banda: ajustable entre 1 Hz y 3 MHz.
+3. Máximo nivel de entrada: hasta 36 dBm (4 W).
+4. Nivel de barrido: ajustable manualmente o en modo automático, desde 20 ms hasta 600 MHz de ancho de banda.
+5. Pantalla y conectividad: posee una pantalla de 10.1 pulgadas, interfaz USB y conectividad Wi-Fi.
 #### **USRP-2920:**
 1. Rango de frecuencias: Soporta señales desde 50MHz hasta 2.2GHz.
 2. Ancho de banda: Dependiendo del muestreo el ancho de banda puede ser de hasta 20MHz con 16 bits y 40MHz con 8 bits.
@@ -62,23 +62,23 @@ Para llevar a cabo esta practica primero se realizo una revision detallada de lo
    - maxima: 18 W. 
 
 ## **Actividad 2: Simulación de Señales en GNU Radio**
-Para  llavar a cabo la simulacion de señales se utilizo GNU Radio, configurando y ejecutando un flujograma, identificando los bloques claves y ajustando las frecuencias de muestreo correspondientes a la practica. Se analizaron las señales en el dominio del tiempo y de la frecuencia observando la relacion entre los bloques y los resultados obtenidos, evaluando el impacto al modificar los parametros como el tipo de dato (complejo o flotante), forma de onda, frecuencia, fase, amplitud y nivel de ruido.
+Para llevar a cabo la simulación de señales, se utilizó GNU Radio, configurando y ejecutando un flujograma, identificando los bloques clave y ajustando las frecuencias de muestreo correspondientes a la práctica. Se analizaron las señales en el dominio del tiempo y de la frecuencia, observando la relación entre los bloques y los resultados obtenidos, y evaluando el impacto al modificar los parámetros, como el tipo de dato (complejo o flotante), la forma de onda, la frecuencia, la fase, la amplitud y el nivel de ruido.
 
 ### **Evidencia**
 - Capturas de pantalla de las señales generadas en el dominio del tiempo y la frecuencia.
 
-La diferencia matematica entre una señal flotante y una comleja tomando como referencia un coseno se puede describir de la siguiente manera:
+La diferencia matemática entre una señal flotante y una compleja, tomando como referencia un coseno, se puede describir de la siguiente manera:
 
 ### Fuente flotante real
 $$ x(t) = A\cos^2(2 \pi f t + \phi) $$
 
-Donde A es la amplitud, f es la frecuencia y phi la fase. Esta señal tiene dos picos espectrales de +/- f debido a la entidad de euler, esto hace que se refleje en el espectro como dos componentes simetricas.
+Donde A es la amplitud, f es la frecuencia y $ \phi $ es la fase. Esta señal tiene dos picos espectrales en ±f debido a la identidad de Euler. Esto hace que se refleje en el espectro como dos componentes simétricas.
 
 ### Fuente compleja
 $$ x_{c}(t) = A e^{j(2 \pi f t + \phi)} $$
 $$ e^{j(2 \pi f t + \phi)} = \cos(2 \pi f t) + j \sin(2 \pi f t) $$
 
-Esta en el dominio de la frecuencia solo tiene un pico en la frecuancia f, eliminando la componente negativa.
+En el dominio de la frecuencia, solo tiene un pico en la frecuencia f, eliminando la componente negativa.
 
 
 #### Coseno complejo
@@ -100,42 +100,103 @@ Esta en el dominio de la frecuencia solo tiene un pico en la frecuancia f, elimi
 <img src="./capturas/cuadrada_float.png" alt="cuadrada_float" width="600">
 
 ## **Actividad 3: Transmisión y Medición de Señales con el USRP 2920**
-En esta actividad se exploró la transmisión y medición de señales con el USRP 2920, un sistema de radio definido por software (SDR). Se configuró el equipo en GNU Radio para transmitir señales y analizar su comportamiento en el dominio del tiempo y la frecuencia. Se midieron parámetros clave como potencia, ancho de banda, piso de ruido y relación señal a ruido (SNR) utilizando un analizador de espectros y un osciloscopio. Finalmente, se compararon diferentes configuraciones y medios de transmisión para evaluar el impacto en la calidad de la señal.
+En esta actividad, se exploró la transmisión y medición de señales con el USRP 2920, un sistema de radio definido por software (SDR). Se configuró el equipo en GNU Radio para transmitir señales y analizar su comportamiento en el dominio del tiempo y de la frecuencia. Se midieron parámetros clave, como la potencia, el ancho de banda, el piso de ruido y la relación señal a ruido (SNR), utilizando un analizador de espectros y un osciloscopio. Finalmente, se compararon diferentes configuraciones y medios de transmisión para evaluar el impacto en la calidad de la señal.
 
 ### **Evidencia**
 - Capturas de pantalla de las mediciones realizadas en el analizador de espectros y el osciloscopio.
 
-### **Señal Cuadrada**
-<div style="display: flex; justify-content: space-evenly; align-items: center; width= 100%; height= 100%">
-  <div>
-    <p>Espectro señal cuadrada tipo flotante</p>
-    <img src="./capturas/square_float.jpg" alt="square_float" width="200" height="100">
+## **Señal Cuadrada**
+
+| ![Espectro señal cuadrada tipo flotante](./capturas/square_float.jpg) | ![Osciloscopio señal cuadrada tipo flotante](./capturas/osc_square_float.jpg) | ![GNU Radio señal cuadrada tipo flotante](./capturas/cuadrada_float.png) |
+|:---------------------------------------------------------------:|:-----------------------------------------------------------------:|:-----------------------------------------------------------------:|
+| **Espectro señal cuadrada tipo flotante** | **Osciloscopio señal cuadrada tipo flotante** | **GNU Radio señal cuadrada tipo flotante** |
+
+| ![Espectro señal cuadrada tipo compleja](./capturas/square_complex.jpg) | ![Osciloscopio señal cuadrada tipo compleja](./capturas/osc_square_complex.jpg) | ![GNU Radio señal cuadrada tipo compleja](./capturas/cuadrada_complex.png) |
+|:---------------------------------------------------------------:|:-----------------------------------------------------------------:|:-----------------------------------------------------------------:|
+| **Espectro señal cuadrada tipo compleja** | **Osciloscopio señal cuadrada tipo compleja** | **GNU Radio señal cuadrada tipo compleja** |
+
+# **Señal Cuadrada**
+
+<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+
+  <div style="text-align: center;">
+    <img src="./capturas/square_float.jpg" width="300">
+    <p><b>Espectro señal cuadrada tipo flotante</b></p>
   </div>
-  <div>
-    <p>Osciloscopio señal cuadrada tipo flotante</p>
-    <img src="./capturas/osc_square_float.jpg" alt="osc_square_float" width="200" height="100">
+
+  <div style="text-align: center;">
+    <img src="./capturas/osc_square_float.jpg" width="300">
+    <p><b>Osciloscopio señal cuadrada tipo flotante</b></p>
   </div>
-  <div>
-    <p>GNU Radio señal cuadrada tipo flotante</p>
-    <img src="./capturas/cuadrada_float.png" alt="cuadrada_float" width="200" height="100">
+
+  <div style="text-align: center;">
+    <img src="./capturas/cuadrada_float.png" width="300">
+    <p><b>GNU Radio señal cuadrada tipo flotante</b></p>
   </div>
+
+  <div style="text-align: center;">
+    <img src="./capturas/square_complex.jpg" width="300">
+    <p><b>Espectro señal cuadrada tipo compleja</b></p>
+  </div>
+
+  <div style="text-align: center;">
+    <img src="./capturas/osc_square_complex.jpg" width="300">
+    <p><b>Osciloscopio señal cuadrada tipo compleja</b></p>
+  </div>
+
+  <div style="text-align: center;">
+    <img src="./capturas/cuadrada_complex.png" width="300">
+    <p><b>GNU Radio señal cuadrada tipo compleja</b></p>
+  </div>
+
 </div>
 
-<div style="display: flex; justify-content: space-evenly; align-items: center">
-  <div>
-    <p>Espectro señal cuadrada tipo compleja</p>
-    <img src="./capturas/square_complex.jpg" alt="square_complex" width="200" height="100">
+
+
+# **Señal Cuadrada**
+
+<div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+
+  <div style="text-align: center; width: 30%;">
+    <img src="./capturas/square_float.jpg" width="100%">
+    <p><b>Espectro señal cuadrada tipo flotante</b></p>
   </div>
-  <div>
-    <p>Osciloscopio señal cuadrada tipo compleja</p>
-    <img src="./capturas/osc_square_complex.jpg" alt="osc_square_complex" width="200" height="100">
+
+  <div style="text-align: center; width: 30%;">
+    <img src="./capturas/osc_square_float.jpg" width="100%">
+    <p><b>Osciloscopio señal cuadrada tipo flotante</b></p>
   </div>
-  <div>
-    <p>GNU Radio señal cuadrada tipo compleja</p>
-    <img src="./capturas/cuadrada_complex.png" alt="cuadrada_complex" width="200" height="100">
+
+  <div style="text-align: center; width: 30%;">
+    <img src="./capturas/cuadrada_float.png" width="100%">
+    <p><b>GNU Radio señal cuadrada tipo flotante</b></p>
   </div>
+
+  <div style="text-align: center; width: 30%;">
+    <img src="./capturas/square_complex.jpg" width="100%">
+    <p><b>Espectro señal cuadrada tipo compleja</b></p>
+  </div>
+
+  <div style="text-align: center; width: 30%;">
+    <img src="./capturas/osc_square_complex.jpg" width="100%">
+    <p><b>Osciloscopio señal cuadrada tipo compleja</b></p>
+  </div>
+
+  <div style="text-align: center; width: 30%;">
+    <img src="./capturas/cuadrada_complex.png" width="100%">
+    <p><b>GNU Radio señal cuadrada tipo compleja</b></p>
+  </div>
+
 </div>
-Para calcular en ancho de banda se utilizo el criterio de 20dB, que consiste en tomar las muestras mas significativas que no pasen de mas de 20dB. En este caso el ancho de banda seria aproximadamente 30 KHz.
+
+
+
+
+
+
+
+
+Para calcular el ancho de banda, se utilizó el criterio de 20 dB, que consiste en tomar las muestras más significativas que no superen los 20 dB. En este caso, el ancho de banda sería aproximadamente 30 kHz.
 
 ### **Señal Coseno**
 <div style="display: flex; justify-content: space-evenly; align-items: center">
@@ -167,7 +228,7 @@ Para calcular en ancho de banda se utilizo el criterio de 20dB, que consiste en 
     <img src="./capturas/coseno_complex.png" alt="coseno_complex" width="200" height="100">
   </div>
 </div>
-En este caso se utilizo el espaciado del analizador de espectros a 1 KHz para un total del spam de 10 KHZ lo cual dio como resultado un ancho de banda aproximadamente de 4 KHz.
+En este caso, se utilizó el espaciado del analizador de espectros a 1 kHz para un total de span de 10 kHz, lo cual dio como resultado un ancho de banda aproximado de 4 kHz.
 
 ### **Señal Triangulo**
 <div style="display: flex; justify-content: space-evenly; align-items: center">
@@ -199,7 +260,7 @@ En este caso se utilizo el espaciado del analizador de espectros a 1 KHz para un
     <img src="./capturas/triangulo_complex.png" alt="coseno_complex" width="200" height="100">
   </div>
 </div>
-En este caso se utilizo el espaciado del analizador de espectros a 1 KHz para un total del spam de 10 KHZ lo cual dio como resultado un ancho de banda aproximadamente de 4 KHz.
+En este caso, se utilizó el espaciado del analizador de espectros a 1 kHz para un total de span de 10 kHz, lo cual dio como resultado un ancho de banda aproximado de 4 kHz.
 
 ### **Espectro de una señal FM**
 La emisora FM que se sintonizó fue la 91.73 MHz, la cual tuvo un ancho de banda de 150 KHz.
@@ -244,17 +305,17 @@ $$ SNR(dB) = 55 (dB) $$
 
 ## **Actividad 4: Análisis de Resultados y Conclusiones**
 
-1. Comparacion de resultados:
-   - A partir de las señales generadas en GNU Radio, verificamos que los resultados coincidían tanto con la simulación como con las mediciones realizadas en el analizador de espectro y el osciloscopio. En particular, observamos que la señal senoidal presenta en el dominio de la frecuencia dos componentes espectrales en su forma real, mientras que en su representación compleja aparece una única componente. Esta correspondencia se evidenció tanto en las simulaciones como en las mediciones experimentales, validando así el comportamiento esperado de la señal.
-   - A partir del cálculo de la relación señal a ruido (SNR), se verificó que los valores teóricos coincidían con las mediciones obtenidas en el analizador de espectros, lo que confirma la precisión del modelo utilizado. En la práctica, se observó que la potencia de la señal y el nivel del piso de ruido medidos eran coherentes con los cálculos previos, lo que indica que los factores que afectan la transmisión, como la frecuencia, la ganancia y el tipo de modulación, fueron correctamente considerados.
+1. Comparación de resultados:
+   - A partir de las señales generadas en GNU Radio, verificamos que los resultados coincidían tanto con la simulación como con las mediciones realizadas en el analizador de espectros y el osciloscopio. En particular, observamos que la señal senoidal presenta, en el dominio de la frecuencia, dos componentes espectrales en su forma real, mientras que en su representación compleja aparece una única componente. Esta correspondencia se evidenció tanto en las simulaciones como en las mediciones experimentales, validando así el comportamiento esperado de la señal.
+   - A partir del cálculo de la relación señal a ruido (SNR), se verificó que los valores teóricos coincidían con las mediciones obtenidas en el analizador de espectros, lo que confirma la precisión del modelo utilizado. En la práctica, se observó que la potencia de la señal y el nivel del piso de ruido medidos eran coherentes con los cálculos previos, lo que indica que los factores que afectan la transmisión, como la frecuencia, la ganancia y el tipo de modulación, fueron correctamente considerados.
 
-2. Reflexionar sobre la SNR:
-   - La relación señal a ruido (SNR) es un parámetro fundamental en las comunicaciones inalámbricas, ya que determina la calidad y confiabilidad de la transmisión de datos. Un SNR alto indica que la señal es significativamente más fuerte que el ruido de fondo, lo que permite una mejor recepción y reduce la probabilidad de errores. En cambio, un SNR bajo implica que la señal está más afectada por el ruido, lo que puede generar una mayor tasa de errores, pérdidas de paquetes y la necesidad de aplicar técnicas más avanzadas de corrección de errores.
+2. Reflexión sobre la SNR:
+   - La relación señal a ruido (SNR) es un parámetro fundamental en las comunicaciones inalámbricas, ya que determina la calidad y confiabilidad de la transmisión de datos. Un SNR alto indica que la señal es significativamente más fuerte que el ruido de fondo, lo que permite una mejor recepción y reduce la probabilidad de errores. En cambio, un SNR bajo implica que la señal está más afectada por el ruido, lo que puede generar una mayor tasa de errores, pérdidas de paquetes y la necesidad de aplicar técnicas avanzadas de corrección de errores.
 
-3. Concluciones:
-   - Las señales complejas permiten una representación más eficiente en términos de ancho de banda, mientras que las señales reales requieren el doble del espectro debido a su simetría. Este principio es fundamental en la transmisión de señales moduladas y en el diseño de sistemas de comunicación eficientes.
-   - El SNR es un indicador clave en la transmisión de señales, ya que determina la claridad con la que una señal puede ser detectada y procesada en presencia de ruido.
-   - La potencia de la señal tiene una relación directa con la calidad de la comunicación, ya que una mayor potencia generalmente mejora la SNR y reduce la interferencia del ruido. No obstante, el incremento de potencia debe gestionarse de manera eficiente, considerando restricciones regulatorias, consumo energético y la optimización del ancho de banda
+3. Conclusiones:
+   - Las señales complejas permiten una representación más eficiente en términos de ancho de banda, mientras que las señales reales requieren el doble del espectro debido a su simetría. Este principio es fundamental en la transmisión de señales moduladas y en el diseño de sistemas de comunicación eficientes.
+   - El SNR es un indicador clave en la transmisión de señales, ya que determina la claridad con la que una señal puede ser detectada y procesada en presencia de ruido.
+   - La potencia de la señal tiene una relación directa con la calidad de la comunicación, ya que una mayor potencia generalmente mejora la SNR y reduce la interferencia del ruido. No obstante, el incremento de potencia debe gestionarse de manera eficiente, considerando restricciones regulatorias, el consumo energético y la optimización del ancho de banda.
 
 ### Referencias
 
