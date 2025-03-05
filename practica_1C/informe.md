@@ -120,79 +120,34 @@ En esta actividad, se exploró la transmisión y medición de señales con el US
 Para calcular el ancho de banda, se utilizó el criterio de 20 dB, que consiste en tomar las muestras más significativas que no superen los 20 dB. En este caso, el ancho de banda sería aproximadamente 30 kHz.
 
 ### **Señal Coseno**
-<div style="display: flex; justify-content: space-evenly; align-items: center">
-  <div>
-    <p>Espectro señal Coseno tipo flotante</p>
-    <img src="./capturas/cos_float.jpg" alt="cos_float" width="200" height="100">
-  </div>
-  <div>
-    <p>Osciloscopio señal Coseno tipo flotante</p>
-    <img src="./capturas/osc_cos_float.jpg" alt="osc_cos_float" width="200" height="100">
-  </div>
-  <div>
-    <p>GNU Radio señal Coseno tipo flotante</p>
-    <img src="./capturas/coseno_float.png" alt="coseno_float" width="200" height="100">
-  </div>
-</div>
 
-<div style="display: flex; justify-content: space-evenly; align-items: center">
-  <div>
-    <p>Espectro señal Coseno tipo compleja</p>
-    <img src="./capturas/cos_complex.jpg" alt="cos_complex" width="200" height="100">
-  </div>
-  <div>
-    <p>Osciloscopio señal Coseno tipo compleja</p>
-    <img src="./capturas/osc_cos_complex.jpg" alt="osc_cos_complex" width="200" height="100">
-  </div>
-  <div>
-    <p>GNU Radio señal Coseno tipo compleja</p>
-    <img src="./capturas/coseno_complex.png" alt="coseno_complex" width="200" height="100">
-  </div>
-</div>
+| <img src="./capturas/cos_float.jpg" alt="cos_float" width="300" height="150"> | <img src="./capturas/osc_cos_float.jpg" alt="cos_float" width="300" height="150"> | <img src="./capturas/coseno_float.png" alt="cos_float" width="300" height="150"> |
+|:---------------------------------------------------------------:|:-----------------------------------------------------------------:|:-----------------------------------------------------------------:|
+| **Espectro señal Coseno tipo flotante** | **Osciloscopio señal Coseno tipo flotante** | **GNU Radio señal Coseno tipo flotante** |
+
+| <img src="./capturas/cos_complex.jpg" alt="cos_float" width="300" height="150"> | <img src="./capturas/osc_cos_complex.jpg" alt="cos_float" width="300" height="150"> | <img src="./capturas/coseno_complex.png" alt="cos_float" width="300" height="150"> |
+|:---------------------------------------------------------------:|:-----------------------------------------------------------------:|:-----------------------------------------------------------------:|
+| **Espectro señal Coseno tipo compleja** | **Osciloscopio señal Coseno tipo compleja** | **GNU Radio señal Coseno tipo compleja** |
+
 En este caso, se utilizó el espaciado del analizador de espectros a 1 kHz para un total de span de 10 kHz, lo cual dio como resultado un ancho de banda aproximado de 4 kHz.
 
 ### **Señal Triangulo**
-<div style="display: flex; justify-content: space-evenly; align-items: center">
-  <div>
-    <p>Espectro señal Triangulo tipo flotante</p>
-    <img src="./capturas/triangle_float.jpg" alt="cos_float" width="200" height="100">
-  </div>
-  <div>
-    <p>Osciloscopio señal Triangulo tipo flotante</p>
-    <img src="./capturas/osc_triangle_float.jpg" alt="osc_cos_float" width="200" height="100">
-  </div>
-  <div>
-    <p>GNU Radio señal Triangulo tipo flotante</p>
-    <img src="./capturas/triangulo_float.png" alt="coseno_float" width="200" height="100">
-  </div>
-</div>
 
-<div style="display: flex; justify-content: space-evenly; align-items: center">
-  <div>
-    <p>Espectro señal Triangulo tipo compleja</p>
-    <img src="./capturas/triangle_complex.jpg" alt="cos_complex" width="200" height="100">
-  </div>
-  <div>
-    <p>Osciloscopio señal Triangulo tipo compleja</p>
-    <img src="./capturas/osc_triangle_complex.jpg" alt="osc_cos_complex" width="200" height="100">
-  </div>
-  <div>
-    <p>GNU Radio señal Triangulo tipo compleja</p>
-    <img src="./capturas/triangulo_complex.png" alt="coseno_complex" width="200" height="100">
-  </div>
-</div>
+| <img src="./capturas/triangle_float.jpg" alt="cos_float" width="300" height="150"> | <img src="./capturas/osc_triangle_float.jpg" alt="cos_float" width="300" height="150"> | <img src="./capturas/triangulo_float.png" alt="cos_float" width="300" height="150"> |
+|:---------------------------------------------------------------:|:-----------------------------------------------------------------:|:-----------------------------------------------------------------:|
+| **Espectro señal triangular tipo flotante** | **Osciloscopio señal triangualar tipo flotante** | **GNU Radio señal triangualar tipo flotante** |
+
+| <img src="./capturas/triangle_complex.jpg" alt="cos_float" width="300" height="150"> | <img src="./capturas/osc_triangle_complex.jpg" alt="cos_float" width="300" height="150"> | <img src="./capturas/triangulo_complex.png" alt="cos_float" width="300" height="150"> |
+|:---------------------------------------------------------------:|:-----------------------------------------------------------------:|:-----------------------------------------------------------------:|
+| **Espectro señal triangualar tipo compleja** | **Osciloscopio señal triangualar tipo compleja** | **GNU Radio señal triangular tipo compleja** |
+
 En este caso, se utilizó el espaciado del analizador de espectros a 1 kHz para un total de span de 10 kHz, lo cual dio como resultado un ancho de banda aproximado de 4 kHz.
 
 ### **Espectro de una señal FM**
 La emisora FM que se sintonizó fue la 91.73 MHz, la cual tuvo un ancho de banda de 150 KHz.
-<div style="display: flex; justify-content: space-evenly; align-items: center">
-  <div>
-    <img src="./capturas/FM_1.jpg" alt="cos_float" width="200" height="100">
-  </div>
-  <div>
-    <img src="./capturas/FM.jpg" alt="osc_cos_float" width="200" height="100">
-  </div>
-</div>
+
+| <img src="./capturas/FM_1.jpg" alt="cos_float" width="300" height="150"> | <img src="./capturas/FM.jpg" alt="cos_float" width="300" height="150"> |
+|:---------------------------------------------------------------:|:-----------------------------------------------------------------:|
 
 ## Para el calculo de la relacion señal a ruido (SNR) se utilizo la siguiente formula:
 
