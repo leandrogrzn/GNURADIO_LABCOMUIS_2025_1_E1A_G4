@@ -111,88 +111,9 @@ En esta actividad, se exploró la transmisión y medición de señales con el US
 |:---------------------------------------------------------------:|:-----------------------------------------------------------------:|:-----------------------------------------------------------------:|
 | **Espectro señal cuadrada tipo flotante** | **Osciloscopio señal cuadrada tipo flotante** | **GNU Radio señal cuadrada tipo flotante** |
 
-| ![Espectro señal cuadrada tipo compleja](./capturas/square_complex.jpg) | ![Osciloscopio señal cuadrada tipo compleja](./capturas/osc_square_complex.jpg) | ![GNU Radio señal cuadrada tipo compleja](./capturas/cuadrada_complex.png) |
+| <img src="./capturas/cos_float.jpg" alt="cos_float" width="200" height="100"> | <img src="./capturas/cos_float.jpg" alt="cos_float" width="200" height="100"> | <img src="./capturas/cos_float.jpg" alt="cos_float" width="200" height="100"> |
 |:---------------------------------------------------------------:|:-----------------------------------------------------------------:|:-----------------------------------------------------------------:|
 | **Espectro señal cuadrada tipo compleja** | **Osciloscopio señal cuadrada tipo compleja** | **GNU Radio señal cuadrada tipo compleja** |
-
-# **Señal Cuadrada**
-
-<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
-
-  <div style="text-align: center;">
-    <img src="./capturas/square_float.jpg" width="300">
-    <p><b>Espectro señal cuadrada tipo flotante</b></p>
-  </div>
-
-  <div style="text-align: center;">
-    <img src="./capturas/osc_square_float.jpg" width="300">
-    <p><b>Osciloscopio señal cuadrada tipo flotante</b></p>
-  </div>
-
-  <div style="text-align: center;">
-    <img src="./capturas/cuadrada_float.png" width="300">
-    <p><b>GNU Radio señal cuadrada tipo flotante</b></p>
-  </div>
-
-  <div style="text-align: center;">
-    <img src="./capturas/square_complex.jpg" width="300">
-    <p><b>Espectro señal cuadrada tipo compleja</b></p>
-  </div>
-
-  <div style="text-align: center;">
-    <img src="./capturas/osc_square_complex.jpg" width="300">
-    <p><b>Osciloscopio señal cuadrada tipo compleja</b></p>
-  </div>
-
-  <div style="text-align: center;">
-    <img src="./capturas/cuadrada_complex.png" width="300">
-    <p><b>GNU Radio señal cuadrada tipo compleja</b></p>
-  </div>
-
-</div>
-
-
-
-# **Señal Cuadrada**
-
-<div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-
-  <div style="text-align: center; width: 30%;">
-    <img src="./capturas/square_float.jpg" width="100%">
-    <p><b>Espectro señal cuadrada tipo flotante</b></p>
-  </div>
-
-  <div style="text-align: center; width: 30%;">
-    <img src="./capturas/osc_square_float.jpg" width="100%">
-    <p><b>Osciloscopio señal cuadrada tipo flotante</b></p>
-  </div>
-
-  <div style="text-align: center; width: 30%;">
-    <img src="./capturas/cuadrada_float.png" width="100%">
-    <p><b>GNU Radio señal cuadrada tipo flotante</b></p>
-  </div>
-
-  <div style="text-align: center; width: 30%;">
-    <img src="./capturas/square_complex.jpg" width="100%">
-    <p><b>Espectro señal cuadrada tipo compleja</b></p>
-  </div>
-
-  <div style="text-align: center; width: 30%;">
-    <img src="./capturas/osc_square_complex.jpg" width="100%">
-    <p><b>Osciloscopio señal cuadrada tipo compleja</b></p>
-  </div>
-
-  <div style="text-align: center; width: 30%;">
-    <img src="./capturas/cuadrada_complex.png" width="100%">
-    <p><b>GNU Radio señal cuadrada tipo compleja</b></p>
-  </div>
-
-</div>
-
-
-
-
-
 
 
 
