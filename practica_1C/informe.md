@@ -107,11 +107,11 @@ En esta actividad, se exploró la transmisión y medición de señales con el US
 
 ## **Señal Cuadrada**
 
-| ![Espectro señal cuadrada tipo flotante](./capturas/square_float.jpg) | ![Osciloscopio señal cuadrada tipo flotante](./capturas/osc_square_float.jpg) | ![GNU Radio señal cuadrada tipo flotante](./capturas/cuadrada_float.png) |
+| <img src="./capturas/square_float.jpg" alt="cos_float" width="300" height="150"> | <img src="./capturas/osc_square_float.jpg" alt="cos_float" width="300" height="150"> | <img src="./capturas/cuadrada_float.png" alt="cos_float" width="300" height="150"> |
 |:---------------------------------------------------------------:|:-----------------------------------------------------------------:|:-----------------------------------------------------------------:|
 | **Espectro señal cuadrada tipo flotante** | **Osciloscopio señal cuadrada tipo flotante** | **GNU Radio señal cuadrada tipo flotante** |
 
-| <img src="./capturas/cos_float.jpg" alt="cos_float" width="200" height="100"> | <img src="./capturas/cos_float.jpg" alt="cos_float" width="200" height="100"> | <img src="./capturas/cos_float.jpg" alt="cos_float" width="200" height="100"> |
+| <img src="./capturas/square_complex.jpg" alt="cos_float" width="300" height="150"> | <img src="./capturas/osc_square_complex.jpg" alt="cos_float" width="300" height="150"> | <img src="./capturas/cuadrada_complex.png" alt="cos_float" width="300" height="150"> |
 |:---------------------------------------------------------------:|:-----------------------------------------------------------------:|:-----------------------------------------------------------------:|
 | **Espectro señal cuadrada tipo compleja** | **Osciloscopio señal cuadrada tipo compleja** | **GNU Radio señal cuadrada tipo compleja** |
 
