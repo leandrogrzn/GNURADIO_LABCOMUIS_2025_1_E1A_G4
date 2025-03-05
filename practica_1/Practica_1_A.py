@@ -97,22 +97,6 @@ class Practica_1_A(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(2, 3):
             self.top_grid_layout.setColumnStretch(c, 1)
-        # Create the options list
-        self._waveform_options = [100, 101, 102, 103, 104, 105]
-        # Create the labels list
-        self._waveform_labels = ['Constant', 'Sine', 'Cosine', 'Square', 'Triangle', 'Saw Tooth']
-        # Create the combo box
-        self._waveform_tool_bar = Qt.QToolBar(self)
-        self._waveform_tool_bar.addWidget(Qt.QLabel("Waveform" + ": "))
-        self._waveform_combo_box = Qt.QComboBox()
-        self._waveform_tool_bar.addWidget(self._waveform_combo_box)
-        for _label in self._waveform_labels: self._waveform_combo_box.addItem(_label)
-        self._waveform_callback = lambda i: Qt.QMetaObject.invokeMethod(self._waveform_combo_box, "setCurrentIndex", Qt.Q_ARG("int", self._waveform_options.index(i)))
-        self._waveform_callback(self.waveform)
-        self._waveform_combo_box.currentIndexChanged.connect(
-            lambda i: self.set_waveform(self._waveform_options[i]))
-        # Create the radio buttons
-        self.top_layout.addWidget(self._waveform_tool_bar)
         self._offset_range = qtgui.Range(-5, 5, 100e-3, 0, 200)
         self._offset_win = qtgui.RangeWidget(self._offset_range, self.set_offset, "Offset", "counter_slider", float, QtCore.Qt.Horizontal)
         self.tab_source_grid_layout_0.addWidget(self._offset_win, 1, 1, 1, 1)
@@ -148,6 +132,22 @@ class Practica_1_A(gr.top_block, Qt.QWidget):
             self.tab_source_grid_layout_0.setRowStretch(r, 1)
         for c in range(0, 1):
             self.tab_source_grid_layout_0.setColumnStretch(c, 1)
+        # Create the options list
+        self._waveform_options = [100, 101, 102, 103, 104, 105]
+        # Create the labels list
+        self._waveform_labels = ['Constant', 'Sine', 'Cosine', 'Square', 'Triangle', 'Saw Tooth']
+        # Create the combo box
+        self._waveform_tool_bar = Qt.QToolBar(self)
+        self._waveform_tool_bar.addWidget(Qt.QLabel("Waveform" + ": "))
+        self._waveform_combo_box = Qt.QComboBox()
+        self._waveform_tool_bar.addWidget(self._waveform_combo_box)
+        for _label in self._waveform_labels: self._waveform_combo_box.addItem(_label)
+        self._waveform_callback = lambda i: Qt.QMetaObject.invokeMethod(self._waveform_combo_box, "setCurrentIndex", Qt.Q_ARG("int", self._waveform_options.index(i)))
+        self._waveform_callback(self.waveform)
+        self._waveform_combo_box.currentIndexChanged.connect(
+            lambda i: self.set_waveform(self._waveform_options[i]))
+        # Create the radio buttons
+        self.top_layout.addWidget(self._waveform_tool_bar)
         self.qtgui_time_sink_x_0 = qtgui.time_sink_c(
             1024, #size
             samp_rate, #samp_rate
@@ -249,7 +249,7 @@ class Practica_1_A(gr.top_block, Qt.QWidget):
             noise_seed=0,
             block_tags=False)
         self.blocks_throttle2_0 = blocks.throttle( gr.sizeof_gr_complex*1, samp_rate, True, 0 if "auto" == "auto" else max( int(float(0.1) * samp_rate) if "auto" == "time" else int(0.1), 1) )
-        self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, waveform, frequency, amplitude, offset, 0)
+        self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_TRI_WAVE, frequency, amplitude, offset, 0)
 
 
         ##################################################
@@ -275,7 +275,6 @@ class Practica_1_A(gr.top_block, Qt.QWidget):
     def set_waveform(self, waveform):
         self.waveform = waveform
         self._waveform_callback(self.waveform)
-        self.analog_sig_source_x_0.set_waveform(self.waveform)
 
     def get_samp_rate(self):
         return self.samp_rate

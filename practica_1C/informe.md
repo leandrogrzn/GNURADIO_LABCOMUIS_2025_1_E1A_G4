@@ -54,12 +54,12 @@ Para llevar a cabo esta practica primero se realizo una revision detallada de lo
 1. Rango de frecuencias: Soporta señales desde 50MHz hasta 2.2GHz.
 2. Ancho de banda: Dependiendo del muestreo el ancho de banda puede ser de hasta 20MHz con 16 bits y 40MHz con 8 bits.
 3. Potencia de salida maxima: Varia segun la frecuencia:
- - de 50 MHz a 1.2 GHz: entre 50 mW a 100 mW(17dBm a 20dBm)
- - de 1.2 GHz a 2.2 GHz: entre 30 mW a 70 mW(15dBm a 18dBm)
+   - de 50 MHz a 1.2 GHz: entre 50 mW a 100 mW(17dBm a 20dBm)
+   - de 1.2 GHz a 2.2 GHz: entre 30 mW a 70 mW(15dBm a 18dBm)
 4. Rango de ganancia: Desde 0 dB a 31.5 dB.
 5. Potencia:
- - tipica: 12 W hasta 15 W.
- - maxima: 18 W. 
+   - tipica: 12 W hasta 15 W.
+   - maxima: 18 W. 
 
 ## **Actividad 2: Simulación de Señales en GNU Radio**
 Para  llavar a cabo la simulacion de señales se utilizo GNU Radio, configurando y ejecutando un flujograma, identificando los bloques claves y ajustando las frecuencias de muestreo correspondientes a la practica. Se analizaron las señales en el dominio del tiempo y de la frecuencia observando la relacion entre los bloques y los resultados obtenidos, evaluando el impacto al modificar los parametros como el tipo de dato (complejo o flotante), forma de onda, frecuencia, fase, amplitud y nivel de ruido.
@@ -98,15 +98,159 @@ Esta en el dominio de la frecuencia solo tiene un pico en la frecuancia f, elimi
 #### Cuadrada flotante
 <img src="./capturas/cuadrada_float.png" alt="cuadrada_float" width="600">
 
+## **Actividad 3: Transmisión y Medición de Señales con el USRP 2920**
+En esta actividad se exploró la transmisión y medición de señales con el USRP 2920, un sistema de radio definido por software (SDR). Se configuró el equipo en GNU Radio para transmitir señales y analizar su comportamiento en el dominio del tiempo y la frecuencia. Se midieron parámetros clave como potencia, ancho de banda, piso de ruido y relación señal a ruido (SNR) utilizando un analizador de espectros y un osciloscopio. Finalmente, se compararon diferentes configuraciones y medios de transmisión para evaluar el impacto en la calidad de la señal.
 
+### **Evidencia**
+- Capturas de pantalla de las mediciones realizadas en el analizador de espectros y el osciloscopio.
 
+### **Señal Cuadrada**
+<div style="display: flex; justify-content: space-evenly; align-items: center">
+  <div>
+    <p>Espectro señal cuadrada tipo flotante</p>
+    <img src="./capturas/square_float.jpg" alt="square_float" width="200" height="100">
+  </div>
+  <div>
+    <p>Osciloscopio señal cuadrada tipo flotante</p>
+    <img src="./capturas/osc_square_float.jpg" alt="osc_square_float" width="200" height="100">
+  </div>
+  <div>
+    <p>GNU Radio señal cuadrada tipo flotante</p>
+    <img src="./capturas/cuadrada_float.png" alt="cuadrada_float" width="200" height="100">
+  </div>
+</div>
 
+<div style="display: flex; justify-content: space-evenly; align-items: center">
+  <div>
+    <p>Espectro señal cuadrada tipo compleja</p>
+    <img src="./capturas/square_complex.jpg" alt="square_complex" width="200" height="100">
+  </div>
+  <div>
+    <p>Osciloscopio señal cuadrada tipo compleja</p>
+    <img src="./capturas/osc_square_complex.jpg" alt="osc_square_complex" width="200" height="100">
+  </div>
+  <div>
+    <p>GNU Radio señal cuadrada tipo compleja</p>
+    <img src="./capturas/cuadrada_complex.png" alt="cuadrada_complex" width="200" height="100">
+  </div>
+</div>
+Para calcular en ancho de banda se utilizo el criterio de 20dB, que consiste en tomar las muestras mas significativas que no pasen de mas de 20dB. En este caso el ancho de banda seria aproximadamente 30 KHz.
 
-### Conclusiones
-Se sintetizan los principales aportes y puntos relevantes de la práctica, evitando repetir lo ya consignado en las otras secciones del informe. 
+### **Señal Coseno**
+<div style="display: flex; justify-content: space-evenly; align-items: center">
+  <div>
+    <p>Espectro señal Coseno tipo flotante</p>
+    <img src="./capturas/cos_float.jpg" alt="cos_float" width="200" height="100">
+  </div>
+  <div>
+    <p>Osciloscopio señal Coseno tipo flotante</p>
+    <img src="./capturas/osc_cos_float.jpg" alt="osc_cos_float" width="200" height="100">
+  </div>
+  <div>
+    <p>GNU Radio señal Coseno tipo flotante</p>
+    <img src="./capturas/coseno_float.png" alt="coseno_float" width="200" height="100">
+  </div>
+</div>
+
+<div style="display: flex; justify-content: space-evenly; align-items: center">
+  <div>
+    <p>Espectro señal Coseno tipo compleja</p>
+    <img src="./capturas/cos_complex.jpg" alt="cos_complex" width="200" height="100">
+  </div>
+  <div>
+    <p>Osciloscopio señal Coseno tipo compleja</p>
+    <img src="./capturas/osc_cos_complex.jpg" alt="osc_cos_complex" width="200" height="100">
+  </div>
+  <div>
+    <p>GNU Radio señal Coseno tipo compleja</p>
+    <img src="./capturas/coseno_complex.png" alt="coseno_complex" width="200" height="100">
+  </div>
+</div>
+En este caso se utilizo el espaciado del analizador de espectros a 1 KHz para un total del spam de 10 KHZ lo cual dio como resultado un ancho de banda aproximadamente de 4 KHz.
+
+### **Señal Triangulo**
+<div style="display: flex; justify-content: space-evenly; align-items: center">
+  <div>
+    <p>Espectro señal Triangulo tipo flotante</p>
+    <img src="./capturas/triangle_float.jpg" alt="cos_float" width="200" height="100">
+  </div>
+  <div>
+    <p>Osciloscopio señal Triangulo tipo flotante</p>
+    <img src="./capturas/osc_triangle_float.jpg" alt="osc_cos_float" width="200" height="100">
+  </div>
+  <div>
+    <p>GNU Radio señal Triangulo tipo flotante</p>
+    <img src="./capturas/triangulo_float.png" alt="coseno_float" width="200" height="100">
+  </div>
+</div>
+
+<div style="display: flex; justify-content: space-evenly; align-items: center">
+  <div>
+    <p>Espectro señal Triangulo tipo compleja</p>
+    <img src="./capturas/triangle_complex.jpg" alt="cos_complex" width="200" height="100">
+  </div>
+  <div>
+    <p>Osciloscopio señal Triangulo tipo compleja</p>
+    <img src="./capturas/osc_triangle_complex.jpg" alt="osc_cos_complex" width="200" height="100">
+  </div>
+  <div>
+    <p>GNU Radio señal Triangulo tipo compleja</p>
+    <img src="./capturas/triangulo_complex.png" alt="coseno_complex" width="200" height="100">
+  </div>
+</div>
+En este caso se utilizo el espaciado del analizador de espectros a 1 KHz para un total del spam de 10 KHZ lo cual dio como resultado un ancho de banda aproximadamente de 4 KHz.
+
+### **Espectro de una señal FM**
+La emisora FM que se sintonizó fue la 91.73 MHz, la cual tuvo un ancho de banda de 150 KHz.
+<div style="display: flex; justify-content: space-evenly; align-items: center">
+  <div>
+    <img src="./capturas/FM_1.jpg" alt="cos_float" width="200" height="100">
+  </div>
+  <div>
+    <img src="./capturas/FM.jpg" alt="osc_cos_float" width="200" height="100">
+  </div>
+</div>
+
+## Para el calculo de la relacion señal a ruido (SNR) se utilizo la siguiente formula:
+$$ SNR(dB) = 10 log_{10}(\frac{P_{señal}}{P_{ruido}}) $$
+## Convertir los valores de dBm a mW:
+$$ P(mW) = 10^{P(dBm)/10} $$
+
+### Teniendo en cuenta lo anterior se calculo el SNR para las siguientes señales:
+1. Señal Coseno
+$$ P_{señal}(mW) = 10^{-30 dB/10} $$
+$$ P_{señal}(mW) = 0.001 (mW) $$
+
+$$ P_{ruido}(mW) = 10^{-80 dB/10} $$
+$$ P_{ruido}(mW) = 10^{-8} (mW) $$
+
+$$ SNR(dB) = 10 log_{10}(\frac{0.001}{10^{-8}}) $$
+$$ SNR(dB) = 40 (dB) $$
+---
+2. Señal Triangulo
+$$ P_{señal}(mW) = 10^{-30 dB/10} $$
+$$ P_{señal}(mW) = 0.001 (mW) $$
+
+$$ P_{ruido}(mW) = 10^{-85 dB/10} $$
+$$ P_{ruido}(mW) = 3.162*10^{-9} (mW) $$
+
+$$ SNR(dB) = 10 log_{10}(\frac{0.001}{3.162*10^{-9}}) $$
+$$ SNR(dB) = 55 (dB) $$
+
+## **Actividad 4: Análisis de Resultados y Conclusiones**
+
+1. Comparacion de resultados:
+   - A partir de las señales generadas en GNU Radio, verificamos que los resultados coincidían tanto con la simulación como con las mediciones realizadas en el analizador de espectro y el osciloscopio. En particular, observamos que la señal senoidal presenta en el dominio de la frecuencia dos componentes espectrales en su forma real, mientras que en su representación compleja aparece una única componente. Esta correspondencia se evidenció tanto en las simulaciones como en las mediciones experimentales, validando así el comportamiento esperado de la señal.
+   - A partir del cálculo de la relación señal a ruido (SNR), se verificó que los valores teóricos coincidían con las mediciones obtenidas en el analizador de espectros, lo que confirma la precisión del modelo utilizado. En la práctica, se observó que la potencia de la señal y el nivel del piso de ruido medidos eran coherentes con los cálculos previos, lo que indica que los factores que afectan la transmisión, como la frecuencia, la ganancia y el tipo de modulación, fueron correctamente considerados.
+
+2. Reflexionar sobre la SNR:
+   - La relación señal a ruido (SNR) es un parámetro fundamental en las comunicaciones inalámbricas, ya que determina la calidad y confiabilidad de la transmisión de datos. Un SNR alto indica que la señal es significativamente más fuerte que el ruido de fondo, lo que permite una mejor recepción y reduce la probabilidad de errores. En cambio, un SNR bajo implica que la señal está más afectada por el ruido, lo que puede generar una mayor tasa de errores, pérdidas de paquetes y la necesidad de aplicar técnicas más avanzadas de corrección de errores.
+
+3. Concluciones:
+   - asdfasdf
+
 
 ### Referencias
-Ejemplo de referencia:
 
 - [Proakis, 2014] J. Proakis, M. Salehi. Fundamentals of communication systems. 2 ed. England: Pearson Education Limited, 2014. p. 164-165, 346. Chapter 5 In: [Biblioteca UIS](https://uis.primo.exlibrisgroup.com/permalink/57UIDS_INST/63p0of/cdi_askewsholts_vlebooks_9781292015699)
 

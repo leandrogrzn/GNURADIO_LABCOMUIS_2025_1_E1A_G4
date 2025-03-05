@@ -195,7 +195,7 @@ blocks:
     samp_rate: samp_rate
     showports: 'False'
     type: complex
-    waveform: waveform
+    waveform: analog.GR_TRI_WAVE
   states:
     bus_sink: false
     bus_source: false
@@ -500,4 +500,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: 3.10.9.2
+  grc_version: 3.10.10.0
