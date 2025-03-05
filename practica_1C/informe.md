@@ -106,7 +106,7 @@ En esta actividad se exploró la transmisión y medición de señales con el USR
 - Capturas de pantalla de las mediciones realizadas en el analizador de espectros y el osciloscopio.
 
 ### **Señal Cuadrada**
-<div style="display: flex; justify-content: space-evenly; align-items: center">
+<div style="display: flex; justify-content: space-evenly; align-items: center; width= 100%; height= 100%">
   <div>
     <p>Espectro señal cuadrada tipo flotante</p>
     <img src="./capturas/square_float.jpg" alt="square_float" width="200" height="100">
