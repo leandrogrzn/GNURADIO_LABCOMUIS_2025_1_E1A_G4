@@ -228,10 +228,10 @@ $$ P_{señal}(mW) = 0.001 (mW) $$
 $$ P_{ruido}(mW) = 10^{-80 dB/10} $$
 $$ P_{ruido}(mW) = 10^{-8} (mW) $$
 
-$$ SNR(dB) = 10 log_{10} \frac{0.001}{10^{-8}} $$
+$$ SNR(dB) = 10 log_{10} (\frac{0.001}{10^{-8}}) $$
 $$ SNR(dB) = 40 (dB) $$
----
-2. Señal Triangulo
+
+#### Señal Triangulo
 $$ P_{señal}(mW) = 10^{-30 dB/10} $$
 $$ P_{señal}(mW) = 0.001 (mW) $$
 
