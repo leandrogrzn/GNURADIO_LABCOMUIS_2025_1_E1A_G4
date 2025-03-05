@@ -221,7 +221,7 @@ $$ P(mW) = 10^{P(dBm)/10} $$
 
 ### Teniendo en cuenta lo anterior se calculo el SNR para las siguientes señales:
 
-**Señal Coseno**
+#### Señal Coseno
 $$ P_{señal}(mW) = 10^{-30 dB/10} $$
 $$ P_{señal}(mW) = 0.001 (mW) $$
 
