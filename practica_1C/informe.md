@@ -247,11 +247,18 @@ $$ SNR(dB) = 55 (dB) $$
    - La relación señal a ruido (SNR) es un parámetro fundamental en las comunicaciones inalámbricas, ya que determina la calidad y confiabilidad de la transmisión de datos. Un SNR alto indica que la señal es significativamente más fuerte que el ruido de fondo, lo que permite una mejor recepción y reduce la probabilidad de errores. En cambio, un SNR bajo implica que la señal está más afectada por el ruido, lo que puede generar una mayor tasa de errores, pérdidas de paquetes y la necesidad de aplicar técnicas más avanzadas de corrección de errores.
 
 3. Concluciones:
-   - asdfasdf
-
+   - Las señales complejas permiten una representación más eficiente en términos de ancho de banda, mientras que las señales reales requieren el doble del espectro debido a su simetría. Este principio es fundamental en la transmisión de señales moduladas y en el diseño de sistemas de comunicación eficientes.
+   - El SNR es un indicador clave en la transmisión de señales, ya que determina la claridad con la que una señal puede ser detectada y procesada en presencia de ruido.
+   - La potencia de la señal tiene una relación directa con la calidad de la comunicación, ya que una mayor potencia generalmente mejora la SNR y reduce la interferencia del ruido. No obstante, el incremento de potencia debe gestionarse de manera eficiente, considerando restricciones regulatorias, consumo energético y la optimización del ancho de banda
 
 ### Referencias
 
-- [Proakis, 2014] J. Proakis, M. Salehi. Fundamentals of communication systems. 2 ed. England: Pearson Education Limited, 2014. p. 164-165, 346. Chapter 5 In: [Biblioteca UIS](https://uis.primo.exlibrisgroup.com/permalink/57UIDS_INST/63p0of/cdi_askewsholts_vlebooks_9781292015699)
+- [Proakis, 2014] J. Proakis, M. Salehi. Fundamentals of communication systems. 2 ed. England: Pearson Education Limited, 2014. In: [Biblioteca UIS](https://uis.primo.exlibrisgroup.com/permalink/57UIDS_INST/63p0of/cdi_askewsholts_vlebooks_9781292015699)
+
+- Rohde & Schwarz GmbH & Co. KG. (2017). R&S®FPC1000 Spectrum Analyzer User Manual (Firmware versión 1.10 y posteriores). Múnich, Alemania: Rohde & Schwarz.
+
+- National Instruments. (2025). USRP-2920 Specifications. National Instruments.
+
+- Rohde & Schwarz GmbH & Co. KG. (2017). R&S RTB2000 Digital Oscilloscope User Manual. Rohde & Schwarz.
 
 ---
