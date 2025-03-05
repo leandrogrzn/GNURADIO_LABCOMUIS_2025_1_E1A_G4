@@ -71,6 +71,7 @@ La diferencia matematica entre una señal flotante y una comleja tomando como re
 
 ### Fuente flotante real
 $$ x(t) = A\cos^2(2 \pi f t + \phi) $$
+
 Donde A es la amplitud, f es la frecuencia y phi la fase. Esta señal tiene dos picos espectrales de +/- f debido a la entidad de euler, esto hace que se refleje en el espectro como dos componentes simetricas.
 
 ### Fuente compleja
