@@ -69,11 +69,11 @@ Para  llavar a cabo la simulacion de señales se utilizo GNU Radio, configurando
 
 La diferencia matematica entre una señal flotante y una comleja tomando como referencia un coseno se puede describir de la siguiente manera:
 
-- Fuente flotante real
+### Fuente flotante real
 $$ x(t) = A\cos^2(2 \pi f t + \phi) $$
 Donde A es la amplitud, f es la frecuencia y phi la fase. Esta señal tiene dos picos espectrales de +/- f debido a la entidad de euler, esto hace que se refleje en el espectro como dos componentes simetricas.
 
-- Fuente compleja
+### Fuente compleja
 $$ x_{c}(t) = A e^{j(2 \pi f t + \phi)} $$
 $$ e^{j(2 \pi f t + \phi)} = \cos(2 \pi f t) + j \sin(2 \pi f t) $$
 
