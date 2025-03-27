@@ -454,6 +454,22 @@ blocks:
     bus_structure: null
     coordinate: [1688, 592.0]
     rotation: 0
+    state: disabled
+- name: blocks_complex_to_mag_0
+  id: blocks_complex_to_mag
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1664, 832.0]
+    rotation: 0
     state: enabled
 - name: blocks_complex_to_real_0
   id: blocks_complex_to_real
@@ -470,7 +486,7 @@ blocks:
     bus_structure: null
     coordinate: [1888.0, 744]
     rotation: 270
-    state: enabled
+    state: disabled
 - name: blocks_float_to_complex_0
   id: blocks_float_to_complex
   parameters:
@@ -518,6 +534,22 @@ blocks:
     bus_structure: null
     coordinate: [424.0, 904]
     rotation: 90
+    state: enabled
+- name: blocks_float_to_complex_1
+  id: blocks_float_to_complex
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1760, 952.0]
+    rotation: 0
     state: enabled
 - name: blocks_null_sink_0
   id: blocks_null_sink
@@ -1864,7 +1896,7 @@ blocks:
     bus_structure: null
     coordinate: [1288, 1068.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: virtual_sink_0
   id: virtual_sink
   parameters:
@@ -1946,7 +1978,7 @@ blocks:
     bus_structure: null
     coordinate: [1352, 1288.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: virtual_source_1
   id: virtual_source
   parameters:
@@ -1980,10 +2012,13 @@ connections:
 - [audio_source_0, '0', blocks_float_to_complex_0_0, '0']
 - [band_pass_filter_0, '0', blocks_complex_to_real_0, '0']
 - [band_pass_filter_0, '0', virtual_sink_0, '0']
+- [blocks_complex_to_mag_0, '0', blocks_float_to_complex_1, '0']
+- [blocks_complex_to_mag_0, '0', blocks_selector_1, '0']
 - [blocks_complex_to_real_0, '0', blocks_selector_1, '0']
 - [blocks_float_to_complex_0, '0', blocks_selector_0, '1']
 - [blocks_float_to_complex_0_0, '0', blocks_selector_0, '2']
 - [blocks_float_to_complex_0_0_0, '0', blocks_selector_0, '3']
+- [blocks_float_to_complex_1, '0', virtual_sink_0, '0']
 - [blocks_selector_0, '0', channels_channel_model_0, '0']
 - [blocks_selector_1, '0', blocks_null_sink_0, '0']
 - [blocks_selector_1, '1', audio_sink_0, '0']
@@ -1997,6 +2032,7 @@ connections:
 - [virtual_source_0, '0', uhd_usrp_sink_0_0, '0']
 - [virtual_source_0_0, '0', virtual_sink_1_0, '0']
 - [virtual_source_1, '0', band_pass_filter_0, '0']
+- [virtual_source_1, '0', blocks_complex_to_mag_0, '0']
 - [virtual_source_1_0, '0', qtgui_freq_sink_x_0_0, '0']
 - [virtual_source_1_0, '0', qtgui_time_sink_x_0_0, '0']
 

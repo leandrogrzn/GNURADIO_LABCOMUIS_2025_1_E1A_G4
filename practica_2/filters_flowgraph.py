@@ -18,7 +18,6 @@ from gnuradio import audio
 from gnuradio import blocks
 from gnuradio import channels
 from gnuradio.filter import firdes
-from gnuradio import filter
 from gnuradio import gr
 from gnuradio.fft import window
 import sys
@@ -243,20 +242,6 @@ class filters_flowgraph(gr.top_block, Qt.QWidget):
             self.tab_usrp_grid_layout_0.setRowStretch(r, 1)
         for c in range(0, 1):
             self.tab_usrp_grid_layout_0.setColumnStretch(c, 1)
-        self._f_min_range = qtgui.Range(10, 5e3, 10, 100, 200)
-        self._f_min_win = qtgui.RangeWidget(self._f_min_range, self.set_f_min, "Low Cutoff Frequency in Hz", "counter_slider", float, QtCore.Qt.Horizontal)
-        self.tab_channel_grid_layout_0.addWidget(self._f_min_win, 3, 0, 1, 1)
-        for r in range(3, 4):
-            self.tab_channel_grid_layout_0.setRowStretch(r, 1)
-        for c in range(0, 1):
-            self.tab_channel_grid_layout_0.setColumnStretch(c, 1)
-        self._f_max_range = qtgui.Range(0, 21.05e3, 10, 5000, 200)
-        self._f_max_win = qtgui.RangeWidget(self._f_max_range, self.set_f_max, "High Cutoff Frequency in Hz", "counter_slider", float, QtCore.Qt.Horizontal)
-        self.tab_channel_grid_layout_0.addWidget(self._f_max_win, 4, 0, 1, 1)
-        for r in range(4, 5):
-            self.tab_channel_grid_layout_0.setRowStretch(r, 1)
-        for c in range(0, 1):
-            self.tab_channel_grid_layout_0.setColumnStretch(c, 1)
         self._desv_freq_range = qtgui.Range(0, 10000, 10, 0, 200)
         self._desv_freq_win = qtgui.RangeWidget(self._desv_freq_range, self.set_desv_freq, "Frequency Offset", "counter_slider", float, QtCore.Qt.Horizontal)
         self.tab_channel_grid_layout_0.addWidget(self._desv_freq_win, 1, 0, 1, 1)
@@ -278,6 +263,20 @@ class filters_flowgraph(gr.top_block, Qt.QWidget):
             self.tab_usrp_grid_layout_0.setRowStretch(r, 1)
         for c in range(0, 1):
             self.tab_usrp_grid_layout_0.setColumnStretch(c, 1)
+        self.uhd_usrp_source_0 = uhd.usrp_source(
+            ",".join(("", '')),
+            uhd.stream_args(
+                cpu_format="fc32",
+                args='',
+                channels=list(range(0,1)),
+            ),
+        )
+        self.uhd_usrp_source_0.set_samp_rate(samp_rate)
+        self.uhd_usrp_source_0.set_time_now(uhd.time_spec(time.time()), uhd.ALL_MBOARDS)
+
+        self.uhd_usrp_source_0.set_center_freq(fc*1e6, 0)
+        self.uhd_usrp_source_0.set_antenna("RX2", 0)
+        self.uhd_usrp_source_0.set_rx_agc(True, 0)
         self.uhd_usrp_sink_0_0 = uhd.usrp_sink(
             ",".join(("", '')),
             uhd.stream_args(
@@ -495,6 +494,20 @@ class filters_flowgraph(gr.top_block, Qt.QWidget):
             self.tab_plots_grid_layout_1.setRowStretch(r, 1)
         for c in range(0, 2):
             self.tab_plots_grid_layout_1.setColumnStretch(c, 1)
+        self._f_min_range = qtgui.Range(10, 5e3, 10, 100, 200)
+        self._f_min_win = qtgui.RangeWidget(self._f_min_range, self.set_f_min, "Low Cutoff Frequency in Hz", "counter_slider", float, QtCore.Qt.Horizontal)
+        self.tab_channel_grid_layout_0.addWidget(self._f_min_win, 3, 0, 1, 1)
+        for r in range(3, 4):
+            self.tab_channel_grid_layout_0.setRowStretch(r, 1)
+        for c in range(0, 1):
+            self.tab_channel_grid_layout_0.setColumnStretch(c, 1)
+        self._f_max_range = qtgui.Range(0, 21.05e3, 10, 5000, 200)
+        self._f_max_win = qtgui.RangeWidget(self._f_max_range, self.set_f_max, "High Cutoff Frequency in Hz", "counter_slider", float, QtCore.Qt.Horizontal)
+        self.tab_channel_grid_layout_0.addWidget(self._f_max_win, 4, 0, 1, 1)
+        for r in range(4, 5):
+            self.tab_channel_grid_layout_0.setRowStretch(r, 1)
+        for c in range(0, 1):
+            self.tab_channel_grid_layout_0.setColumnStretch(c, 1)
         self.channels_channel_model_0 = channels.channel_model(
             noise_voltage=noise,
             frequency_offset=(desv_freq/samp_rate),
@@ -508,22 +521,13 @@ class filters_flowgraph(gr.top_block, Qt.QWidget):
         self.blocks_selector_0 = blocks.selector(gr.sizeof_gr_complex*1,source_type,0)
         self.blocks_selector_0.set_enabled(True)
         self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_float*1)
+        self.blocks_float_to_complex_1 = blocks.float_to_complex(1)
         self.blocks_float_to_complex_0_0_0 = blocks.float_to_complex(1)
         self.blocks_float_to_complex_0_0 = blocks.float_to_complex(1)
         self.blocks_float_to_complex_0 = blocks.float_to_complex(1)
-        self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
-        self.band_pass_filter_0 = filter.interp_fir_filter_ccf(
-            1,
-            firdes.band_pass(
-                1,
-                samp_rate,
-                f_min,
-                f_max,
-                100,
-                window.WIN_BLACKMAN,
-                6.76))
+        self.blocks_complex_to_mag_0 = blocks.complex_to_mag(1)
         self.audio_source_0 = audio.source(int(samp_rate), '', True)
-        self.audio_sink_0 = audio.sink(int(samp_rate), '', True)
+        self.audio_sink_0 = audio.sink((int(samp_rate/44000)), '', True)
         self.analog_sig_source_x_0_0 = analog.sig_source_f(samp_rate, waveform, frequency, amplitude, offset, phase)
         self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, waveform, frequency, amplitude, offset, phase)
 
@@ -534,21 +538,21 @@ class filters_flowgraph(gr.top_block, Qt.QWidget):
         self.connect((self.analog_sig_source_x_0, 0), (self.blocks_selector_0, 0))
         self.connect((self.analog_sig_source_x_0_0, 0), (self.blocks_float_to_complex_0, 0))
         self.connect((self.audio_source_0, 0), (self.blocks_float_to_complex_0_0, 0))
-        self.connect((self.band_pass_filter_0, 0), (self.blocks_complex_to_real_0, 0))
-        self.connect((self.band_pass_filter_0, 0), (self.qtgui_freq_sink_x_0_0, 0))
-        self.connect((self.band_pass_filter_0, 0), (self.qtgui_time_sink_x_0_0, 0))
-        self.connect((self.blocks_complex_to_real_0, 0), (self.blocks_selector_1, 0))
+        self.connect((self.blocks_complex_to_mag_0, 0), (self.blocks_float_to_complex_1, 0))
+        self.connect((self.blocks_complex_to_mag_0, 0), (self.blocks_selector_1, 0))
         self.connect((self.blocks_float_to_complex_0, 0), (self.blocks_selector_0, 1))
         self.connect((self.blocks_float_to_complex_0_0, 0), (self.blocks_selector_0, 2))
         self.connect((self.blocks_float_to_complex_0_0_0, 0), (self.blocks_selector_0, 3))
+        self.connect((self.blocks_float_to_complex_1, 0), (self.qtgui_freq_sink_x_0_0, 0))
+        self.connect((self.blocks_float_to_complex_1, 0), (self.qtgui_time_sink_x_0_0, 0))
         self.connect((self.blocks_selector_0, 0), (self.channels_channel_model_0, 0))
         self.connect((self.blocks_selector_1, 1), (self.audio_sink_0, 0))
         self.connect((self.blocks_selector_1, 0), (self.blocks_null_sink_0, 0))
         self.connect((self.blocks_wavfile_source_0, 0), (self.blocks_float_to_complex_0_0_0, 0))
-        self.connect((self.channels_channel_model_0, 0), (self.band_pass_filter_0, 0))
         self.connect((self.channels_channel_model_0, 0), (self.qtgui_freq_sink_x_0, 0))
         self.connect((self.channels_channel_model_0, 0), (self.qtgui_time_sink_x_0, 0))
         self.connect((self.channels_channel_model_0, 0), (self.uhd_usrp_sink_0_0, 0))
+        self.connect((self.uhd_usrp_source_0, 0), (self.blocks_complex_to_mag_0, 0))
 
 
     def closeEvent(self, event):
@@ -591,13 +595,13 @@ class filters_flowgraph(gr.top_block, Qt.QWidget):
         self.samp_rate = samp_rate
         self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
         self.analog_sig_source_x_0_0.set_sampling_freq(self.samp_rate)
-        self.band_pass_filter_0.set_taps(firdes.band_pass(1, self.samp_rate, self.f_min, self.f_max, 100, window.WIN_BLACKMAN, 6.76))
         self.channels_channel_model_0.set_frequency_offset((self.desv_freq/self.samp_rate))
         self.qtgui_freq_sink_x_0.set_frequency_range(0, self.samp_rate)
         self.qtgui_freq_sink_x_0_0.set_frequency_range(0, self.samp_rate)
         self.qtgui_time_sink_x_0.set_samp_rate(self.samp_rate)
         self.qtgui_time_sink_x_0_0.set_samp_rate(self.samp_rate)
         self.uhd_usrp_sink_0_0.set_samp_rate(self.samp_rate)
+        self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
 
     def get_phase(self):
         return self.phase
@@ -636,20 +640,19 @@ class filters_flowgraph(gr.top_block, Qt.QWidget):
     def set_fc(self, fc):
         self.fc = fc
         self.uhd_usrp_sink_0_0.set_center_freq(self.fc*1e6, 0)
+        self.uhd_usrp_source_0.set_center_freq(self.fc*1e6, 0)
 
     def get_f_min(self):
         return self.f_min
 
     def set_f_min(self, f_min):
         self.f_min = f_min
-        self.band_pass_filter_0.set_taps(firdes.band_pass(1, self.samp_rate, self.f_min, self.f_max, 100, window.WIN_BLACKMAN, 6.76))
 
     def get_f_max(self):
         return self.f_max
 
     def set_f_max(self, f_max):
         self.f_max = f_max
-        self.band_pass_filter_0.set_taps(firdes.band_pass(1, self.samp_rate, self.f_min, self.f_max, 100, window.WIN_BLACKMAN, 6.76))
 
     def get_desv_freq(self):
         return self.desv_freq
