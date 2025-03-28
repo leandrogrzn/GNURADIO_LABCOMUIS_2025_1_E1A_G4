@@ -1,12 +1,6 @@
 # Laboratorio de Comunicaciones
 ## Universidad Industrial de Santander
 
-- En caso de utilizar herramientas de Inteligencia Artificial para asistencia en la redacción, análisis o cualquier otra tarea, de debe especificar en la sección de **Declaración de Originalidad y Responsabilidad** aclarando el alcance y propósito de su uso.
-- Cualquier omisión en la declaración del uso de IA o la presentación de contenido plagiado será penalizado con nota de 0.0 y reporte a la coordinación del programa.
-- Si emplea referencias disponibles en línea, agregue los hipervínculos respectivos.  
-
-Al final de la plantilla encontrará algunos ejemplos para enriquecer su informe, incluyendo cómo insertar imágenes, tablas y ecuaciones, así como generar hipervínculos a su repositorio o al propio informe. Ir a [ejemplos en Markdown](#ejemplos-usando-markdown)
-
 ---
 # Práctica 2. Modelo de canal
 
@@ -27,7 +21,7 @@ Los autores de este informe certifican que el contenido aquí presentado es orig
 
 Asimismo, los autores asumen plena responsabilidad por la información contenida en este documento. 
 
-Uso de IA: [Indicar si se usó IA y para qué aspectos específicos, por ejemplo: "Se utilizó ChatGPT para reformular secciones del texto y verificar gramática, pero el contenido técnico fue desarrollado íntegramente por los autores."]
+Se utilizó ChatGPT para la corrección ortográfica, gramatical y de puntuación del texto, asegurando claridad y coherencia. No obstante, el contenido técnico y la interpretación de los resultados fueron desarrollados íntegramente por los autores.
 
 ---
 ## Contenido
