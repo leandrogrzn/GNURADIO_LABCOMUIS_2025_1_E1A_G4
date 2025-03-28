@@ -131,25 +131,71 @@ Las imágenes capturadas en el osciloscopio muestran señales moduladas en ampli
 
 Se empleó un analizador de espectros para observar la respuesta en frecuencia de las señales y se estudiaron los efectos del canal en la distribución espectral.
 
+Para calcular el espectro de una señal podemos utilizar herramientas como lo es la transformada de fourier la cual nos permite descomponer la señal en sus comoponentes en frecuencia.
 
 
 
 
+### 1. Transformada de Fourier de Tiempo Continuo
+
+Si tienes una señal en el dominio del tiempo \( x(t) \), su espectro \( X(f) \) se obtiene con la *Transformada de Fourier* definida como:
+
+$$
+X(f) = \int_{-\infty}^{\infty} x(t) e^{-j2\pi f t} dt
+$$
+
+Esto te da el espectro de frecuencia, indicando las componentes de frecuencia de la señal.
+
+#### Señal Senoidal
+
+Si $ x(t) = A \cos(2\pi f_0 t) $, su *Transformada de Fourier* es:
+
+$$
+X(f) = \frac{A}{2} \left[ \delta(f - f_0) + \delta(f + f_0) \right]
+$$
+
+Lo que significa que la señal tiene picos en $ f_0 $ y  $ -f_0 $. Este caso seria el mismo análisis para una señal cuadratica y triangular, solo que esta va a ser una serie de sumatorias en el dominio de la frecuencia con una amplitud dependiente de la forma de la señal. 
+
+| <img src="./capturas_2_3/capturas/seno_1KHz_100MHz.jpeg" alt="cos_float" width="300" height="150"> | <img src="./capturas_2_3/capturas/cuadrada_1KHz_100MHz.jpeg" alt="cos_float" width="300" height="150"> | <img src="./capturas_2_3/capturas/triangular_1KHz_300MHz.jpeg" alt="cos_float" width="300" height="150"> | <img src="./capturas_2_3/capturas/triangular_ruido_1.jpg" alt="cos_float" width="300" height="150"> |
+|:---------------------------------------------------------------:|:-----------------------------------------------------------------:|:-----------------------------------------------------------------:|:-----------------------------------------------------------------:|
+| **Seno frecuencia 1KHz portadora 100MHz** | **Cuadrada frecuancia 1KHz portadora 100MHz** | **Triangular freuancia 1KHz portadora 300MHz** | **Triangular con ruido** |
+
+Teniendo en cuenta las distintas formas de onda visualizadas en el analizador de espectro, se observa que los espectros de frecuencia obtenidos presentan una correspondencia con los patrones teóricos esperados para cada tipo de señal. La distribución de los componentes espectrales y la presencia de armónicos concuerdan con el análisis teórico de Fourier, donde cada forma de onda se descompone en una serie de frecuencias fundamentales y sus armónicos correspondientes. Ademas, El efecto del ruido sobre la respuesta en frecuencia de las señales medidas en el analizador de espectro se evidencia en un incremento del nivel de fondo en todo el espectro, lo que introduce una mayor densidad espectral fuera de las frecuencias principales y genera una reducción en la claridad de los armónicos dominantes. En la imagen correspondiente a la señal con ruido, se observa cómo la forma espectral esperada de la onda triangular sigue presente, pero con una mayor dispersión de energía en frecuencias no deseadas y reduccion de espectros.
 
 
+## Actividad 4: Efectos de los fenómenos de canal en la conversión de frecuencia
+
+Se examinó cómo la conversión de frecuencia influye en la transmisión, tanto en sistemas cableados como inalámbricos. Se evaluó el impacto de la variación de frecuencia y la distancia en la calidad de la señal recibida.
 
 
+| <img src="./capturas_2_4/captura2_4bcc.png" alt="cos_float" width="300" height="150"> | <img src="./capturas_2_4/captura2_4cc.png" alt="cos_float" width="300" height="150"> |
+|:---------------------------------------------------------------:|:-----------------------------------------------------------------:|
+| **Señal Triangular cable corto** | **Señal Cuadrada cable corto** |
 
+| <img src="./capturas_2_4/captura2_4ccl.png" alt="cos_float" width="300" height="150"> | <img src="./capturas_2_4/captura2_4cl.png" alt="cos_float" width="300" height="150"> |
+|:---------------------------------------------------------------:|:-----------------------------------------------------------------:|
+| **Señal Triangular cable largo** | **Señal Cuadrada cable largo** |
 
+Como se observa en las imagenes se presenta cuatro escenarios en los que se analizan señales triangulares y cuadradas transmitidas a través de cables de diferente longitud: un cable corto de aproximadamente 1.10 metros y un cable largo de aproximadamente 37 metros. A partir de la comparación de estas señales en el dominio del tiempo y su espectro de frecuencia, el uso de un cable largo introduce atenuación, distorsión y retardo en la señal. Mientras que la señal triangular mantiene mejor su forma, la señal cuadrada es más susceptible a la pérdida de armónicos y presenta oscilaciones en los flancos. En aplicaciones prácticas, estos efectos deben ser considerados para minimizar la degradación de la señal, por ejemplo, mediante el uso de cables de menor longitud, amplificadores de señal o técnicas de compensación de pérdidas.
 
 
 
 ### Conclusiones
-Se sintetizan los principales aportes y puntos relevantes de la práctica, evitando repetir lo ya consignado en las otras secciones del informe. 
+- El espectro de las señales analizadas muestra que el ruido introducido en el sistema modifica la distribución de frecuencias, generando un ensanchamiento del espectro y una disminución en la nitidez de los armónicos. La señal cuadrada, al depender de múltiples armónicos de alta frecuencia, experimenta una mayor distorsión en comparación con la señal triangular, que conserva mejor su estructura fundamental. Esto confirma que el ruido y la impedancia del medio influyen directamente en la calidad espectral de la señal.
+
+- Los resultados obtenidos resaltan la importancia de seleccionar adecuadamente la longitud del cable en función de la aplicación. Ya que las señales transmitidas a través del cable largo presentan una disminución en amplitud y una mayor afectación en la transmisión de armónicos, lo que provoca una pérdida en la fidelidad de la señal original, en comparacion con el cable corto.
+
+
 
 ### Referencias
-Ejemplo de referencia:
 
-- [Proakis, 2014] J. Proakis, M. Salehi. Fundamentals of communication systems. 2 ed. England: Pearson Education Limited, 2014. p. 164-165, 346. Chapter 5 In: [Biblioteca UIS](https://uis.primo.exlibrisgroup.com/permalink/57UIDS_INST/63p0of/cdi_askewsholts_vlebooks_9781292015699)
+
+- [Proakis, 2014] J. Proakis, M. Salehi. Fundamentals of communication systems. 2 ed. England: Pearson Education Limited, 2014. In: [Biblioteca UIS](https://uis.primo.exlibrisgroup.com/permalink/57UIDS_INST/63p0of/cdi_askewsholts_vlebooks_9781292015699)
+
+- Rohde & Schwarz GmbH & Co. KG. (2017). R&S®FPC1000 Spectrum Analyzer User Manual (Firmware versión 1.10 y posteriores). Múnich, Alemania: Rohde & Schwarz.
+
+- National Instruments. (2025). USRP-2920 Specifications. National Instruments.
+
+- Rohde & Schwarz GmbH & Co. KG. (2017). R&S RTB2000 Digital Oscilloscope User Manual. Rohde & Schwarz.
 
 ---
