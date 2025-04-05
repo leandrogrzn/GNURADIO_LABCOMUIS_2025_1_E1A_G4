@@ -75,6 +75,27 @@ blocks:
     coordinate: [208, 24.0]
     rotation: 0
     state: enabled
+- name: B
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: muestras por simbolo
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '1'
+    stop: '20'
+    value: '10'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [744, 664.0]
+    rotation: 0
+    state: disabled
 - name: GTX
   id: variable_qtgui_range
   parameters:
@@ -180,11 +201,23 @@ blocks:
     coordinate: [632, 24.0]
     rotation: 0
     state: enabled
+- name: n
+  id: variable
+  parameters:
+    comment: ''
+    value: '3'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [664, 664.0]
+    rotation: 0
+    state: disabled
 - name: samp_rate
   id: variable
   parameters:
     comment: ''
-    value: 1.5625e6
+    value: 25e6/32
   states:
     bus_sink: false
     bus_source: false
@@ -192,6 +225,26 @@ blocks:
     coordinate: [24, 128.0]
     rotation: 0
     state: enabled
+- name: analog_random_source_x_0
+  id: analog_random_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    max: int(math.pow(2,n))
+    maxoutbuf: '0'
+    min: '0'
+    minoutbuf: '0'
+    num_samps: '1000'
+    repeat: 'True'
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [88, 872.0]
+    rotation: 0
+    state: disabled
 - name: analog_sig_source_x_0
   id: analog_sig_source_x
   parameters:
@@ -212,7 +265,94 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [88, 408.0]
+    coordinate: [64, 320.0]
+    rotation: 0
+    state: disabled
+- name: blocks_add_const_vxx_1
+  id: blocks_add_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: (math.pow(2,n)-1)/2
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [736, 896.0]
+    rotation: 0
+    state: disabled
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: 2/(math.pow(2,n)-1)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [896, 896.0]
+    rotation: 0
+    state: disabled
+- name: blocks_repeat_0
+  id: blocks_repeat
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    interp: int(B)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [544, 896.0]
+    rotation: 0
+    state: disabled
+- name: blocks_uchar_to_float_0
+  id: blocks_uchar_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 904.0]
+    rotation: 0
+    state: disabled
+- name: blocks_wavfile_source_0
+  id: blocks_wavfile_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    file: /home/com1_E1A_G4/labcom/GNURADIO_LABCOMUIS_2025_1_E1A_G4/practica_2/labachata_manuelturizo.wav
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nchan: '1'
+    repeat: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [96, 656.0]
     rotation: 0
     state: enabled
 - name: envolventecompleja_0
@@ -232,6 +372,19 @@ blocks:
     coordinate: [400, 440.0]
     rotation: 0
     state: enabled
+- name: import_1
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import math
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [648, 752.0]
+    rotation: 0
+    state: disabled
 - name: qtgui_freq_sink_x_0
   id: qtgui_freq_sink_x
   parameters:
@@ -408,6 +561,26 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [1024, 248.0]
+    rotation: 0
+    state: enabled
+- name: rational_resampler_xxx_0
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: '44100'
+    fbw: '0'
+    interp: int(samp_rate)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: '[]'
+    type: fff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [408, 632.0]
     rotation: 0
     state: enabled
 - name: uhd_usrp_sink_0
@@ -687,12 +860,59 @@ blocks:
     coordinate: [960, 512.0]
     rotation: 0
     state: enabled
+- name: virtual_sink_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: m_t
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1080, 896.0]
+    rotation: 0
+    state: disabled
+- name: virtual_sink_1
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: m_t
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [656, 656.0]
+    rotation: 0
+    state: enabled
+- name: virtual_source_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: m_t
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [136, 480.0]
+    rotation: 0
+    state: enabled
 
 connections:
+- [analog_random_source_x_0, '0', blocks_uchar_to_float_0, '0']
 - [analog_sig_source_x_0, '0', envolventecompleja_0, '0']
+- [blocks_add_const_vxx_1, '0', blocks_multiply_const_vxx_0, '0']
+- [blocks_multiply_const_vxx_0, '0', virtual_sink_0, '0']
+- [blocks_repeat_0, '0', blocks_add_const_vxx_1, '0']
+- [blocks_uchar_to_float_0, '0', blocks_repeat_0, '0']
+- [blocks_wavfile_source_0, '0', rational_resampler_xxx_0, '0']
 - [envolventecompleja_0, '0', qtgui_freq_sink_x_0, '0']
 - [envolventecompleja_0, '0', qtgui_time_sink_x_0, '0']
 - [envolventecompleja_0, '0', uhd_usrp_sink_0, '0']
+- [rational_resampler_xxx_0, '0', virtual_sink_1, '0']
+- [virtual_source_0, '0', envolventecompleja_0, '0']
 
 metadata:
   file_format: 1
