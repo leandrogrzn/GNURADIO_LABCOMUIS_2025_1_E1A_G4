@@ -151,7 +151,7 @@ class practica_4_A(gr.top_block, Qt.QWidget):
         self.qtgui_freq_sink_x_0_0 = qtgui.freq_sink_c(
             8192, #size
             window.WIN_BLACKMAN_hARRIS, #wintype
-            fc, #fc
+            (fc*1e6), #fc
             (samp_rate/D), #bw
             "", #name
             1,
@@ -193,7 +193,7 @@ class practica_4_A(gr.top_block, Qt.QWidget):
         self.qtgui_freq_sink_x_0 = qtgui.freq_sink_c(
             8192, #size
             window.WIN_BLACKMAN_hARRIS, #wintype
-            fc, #fc
+            (fc*1e6), #fc
             samp_rate, #bw
             "", #name
             1,
@@ -294,8 +294,8 @@ class practica_4_A(gr.top_block, Qt.QWidget):
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
         self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, (self.fcb*1e3), 1e4, window.WIN_HAMMING, 6.76))
-        self.qtgui_freq_sink_x_0.set_frequency_range(self.fc, self.samp_rate)
-        self.qtgui_freq_sink_x_0_0.set_frequency_range(self.fc, (self.samp_rate/self.D))
+        self.qtgui_freq_sink_x_0.set_frequency_range((self.fc*1e6), self.samp_rate)
+        self.qtgui_freq_sink_x_0_0.set_frequency_range((self.fc*1e6), (self.samp_rate/self.D))
         self.qtgui_freq_sink_x_0_0_0.set_frequency_range(self.fc, (self.samp_rate/self.D))
         self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
 
@@ -311,8 +311,8 @@ class practica_4_A(gr.top_block, Qt.QWidget):
 
     def set_fc(self, fc):
         self.fc = fc
-        self.qtgui_freq_sink_x_0.set_frequency_range(self.fc, self.samp_rate)
-        self.qtgui_freq_sink_x_0_0.set_frequency_range(self.fc, (self.samp_rate/self.D))
+        self.qtgui_freq_sink_x_0.set_frequency_range((self.fc*1e6), self.samp_rate)
+        self.qtgui_freq_sink_x_0_0.set_frequency_range((self.fc*1e6), (self.samp_rate/self.D))
         self.qtgui_freq_sink_x_0_0_0.set_frequency_range(self.fc, (self.samp_rate/self.D))
         self.uhd_usrp_source_0.set_center_freq(self.fc*1e6, 0)
 
@@ -334,7 +334,7 @@ class practica_4_A(gr.top_block, Qt.QWidget):
 
     def set_D(self, D):
         self.D = D
-        self.qtgui_freq_sink_x_0_0.set_frequency_range(self.fc, (self.samp_rate/self.D))
+        self.qtgui_freq_sink_x_0_0.set_frequency_range((self.fc*1e6), (self.samp_rate/self.D))
         self.qtgui_freq_sink_x_0_0_0.set_frequency_range(self.fc, (self.samp_rate/self.D))
 
 

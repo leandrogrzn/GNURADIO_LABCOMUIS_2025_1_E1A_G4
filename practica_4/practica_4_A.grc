@@ -273,7 +273,7 @@ blocks:
     color9: '"dark green"'
     comment: ''
     ctrlpanel: 'False'
-    fc: fc
+    fc: fc*1e6
     fftsize: '8192'
     freqhalf: 'True'
     grid: 'False'
@@ -354,7 +354,7 @@ blocks:
     color9: '"dark green"'
     comment: ''
     ctrlpanel: 'False'
-    fc: fc
+    fc: fc*1e6
     fftsize: '8192'
     freqhalf: 'True'
     grid: 'False'
