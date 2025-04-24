@@ -80,7 +80,7 @@ class practica_4_A(gr.top_block, Qt.QWidget):
         self._fcb_range = qtgui.Range(10, 100, 1, 100, 200)
         self._fcb_win = qtgui.RangeWidget(self._fcb_range, self.set_fcb, "frecuencia de corte [MHz]", "counter_slider", float, QtCore.Qt.Horizontal)
         self.top_layout.addWidget(self._fcb_win)
-        self._fc_range = qtgui.Range(88, 108, 1e-2, 103.7, 200)
+        self._fc_range = qtgui.Range(50, 2200, 1e-2, 103.7, 200)
         self._fc_win = qtgui.RangeWidget(self._fc_range, self.set_fc, "Frecuencia RX [MHz]", "counter_slider", float, QtCore.Qt.Horizontal)
         self.top_layout.addWidget(self._fc_win)
         self._GRX_range = qtgui.Range(0, 30, 1, 0, 200)
