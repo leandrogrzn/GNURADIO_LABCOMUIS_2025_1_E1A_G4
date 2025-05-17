@@ -388,7 +388,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [192, 164.0]
+    coordinate: [336, 200.0]
     rotation: 0
     state: enabled
 - name: low_pass_filter_0
